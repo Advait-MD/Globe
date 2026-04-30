@@ -17,7 +17,7 @@ async def get_latest_news():
         "page-size": 5,
         "order-by": "newest",
         "show-fields": "trailText,headline",
-        "section": "world"  # You can specify sections as needed
+        "section": "world"  
     }
 
     async with httpx.AsyncClient() as client:
