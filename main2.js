@@ -17,10 +17,14 @@ document.body.appendChild(renderer.domElement);
 const textureLoader = new THREE.TextureLoader();
 
 const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+const earth_layer = new THREE.SphereGeometry(1, 64, 64);
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: textureLoader.load('earth_pixel.png')
 });
-
+const earthLayerMaterial = new THREE.MeshStandardMaterial({
+  transparent: true,
+  opacity: 0.1,
+});
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();  
 
@@ -45,6 +49,9 @@ window.addEventListener('click', (event) => {
 
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(earth);
+
+const earthLayer = new THREE.Mesh(earth_layer, earthLayerMaterial);
+scene.add(earthLayer);
 
 const light = new THREE.DirectionalLight(0xffffff, 2);
 light.position.set(5, 3, 5);
@@ -104,6 +111,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   earth.rotation.y += 0.002;
+  earthLayer.rotation.y += 0.002;
 
   stars.rotation.z += 0.00020;
   stars.rotation.y = 0.001;

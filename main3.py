@@ -52,7 +52,7 @@ async def get_coordinates(location):
 async def get_latest_news_with_locations():
     params = {
         "api-key": GUARDIAN_API_KEY,
-        "page-size": 5,
+        "page-size": 10,
         "order-by": "newest",
         "show-fields": "trailText,headline",
         "section": "world"
@@ -98,7 +98,9 @@ async def get_latest_news_with_locations():
 
         extracted.append({
             "id": item.get("id"),
-            "locations": coords_list
+            "Headline": item.get("fields", {}).get("headline"),
+            "WebURL": item.get("webUrl"),
+            "Locations": coords_list
         })
 
     return extracted
