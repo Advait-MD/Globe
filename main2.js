@@ -16,22 +16,43 @@ document.body.appendChild(renderer.domElement);
 
 const textureLoader = new THREE.TextureLoader();
 
-const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
-const earth_layer = new THREE.SphereGeometry(1, 64, 64);
+const earthGeometry = new THREE.SphereGeometry(1, 62, 62);
+const earth_layer = new THREE.SphereGeometry(1, 62, 62);
 const earthMaterial = new THREE.MeshStandardMaterial({
-  map: textureLoader.load('earth_pixel.png')
+  map: textureLoader.load('earth pix2.png')
 });
 const earthLayerMaterial = new THREE.MeshStandardMaterial({
   transparent: true,
   opacity: 0.1,
 });
 const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();  
+const mouse = new THREE.Vector2();
 
+window.addEventListener('click', (event) => {
+
+  // 1. Convert mouse
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // 2. Update ray
+  raycaster.setFromCamera(mouse, camera);
+
+  // 3. Intersect
+  const intersects = raycaster.intersectObject(earth);
+
+  if (intersects.length > 0) {
+    const point = intersects[0].point;
+    console.log("Hit:", point);
+  }
+
+});
+  
 // Orbit Control Implementation
 const orbitControl = {
   enabled: true,
   autoRotate: true,
+  dampingFactor: 0.05,
+  enabledDamping: true,
   autoRotateSpeed: 2,
   rotateSpeed: 1,
   zoomSpeed: 1.2,
