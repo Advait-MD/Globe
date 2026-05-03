@@ -6,12 +6,21 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
+from fastapi.middleware.cors import CORSMiddleware
 
 # 🔹 Load env variables
 load_dotenv()
 
 # 🔹 FastAPI app
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
 
 # 🔹 API config
 GUARDIAN_API_KEY = os.getenv("API_KEY")

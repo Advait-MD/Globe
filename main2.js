@@ -234,8 +234,8 @@ scene.add(starsMid);
 function animate() {
   requestAnimationFrame(animate);
 
-  earth.rotation.y += 0.002;
-  earthLayer.rotation.y += 0.002;
+ // earth.rotation.y += 0.002;
+  //earthLayer.rotation.y += 0.002;
 
   stars.rotation.z += 0.00020;
   stars.rotation.y = 0.001;

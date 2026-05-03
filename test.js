@@ -1,31 +1,18 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.158/examples/jsm/controls/OrbitControls.js';
+function degToRad(lat, lon) {
+  const latRad = lat * Math.PI / 180;
+  const lonRad = lon * Math.PI / 180;
+  return {latRad, lonRad};
+  }
 
-const scene = new THREE.Scene();
+const {latRad, lonRad} = degToRad(28.6139, 77.2088);
+console.log(latRad, lonRad);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-camera.position.z = 3;
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
-
-// OrbitControls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-
-// simple cube (test)
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  controls.update();
-
-  renderer.render(scene, camera);
+function latLonToXYZ(latRad, lonRad, radius) {
+  const x = radius * Math.cos(latRad) * Math.cos(lonRad);
+  const y = radius * Math.cos(latRad) * Math.sin(lonRad);
+  const z = radius * Math.sin(latRad);
+  return {x, y, z};
 }
 
-animate();
+const {x, y, z} = latLonToXYZ(latRad, lonRad, 1);
+console.log(x, y, z);

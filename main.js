@@ -1,5 +1,31 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js';
 
+
+fetch("http://127.0.0.1:8000")
+  .then(res => {
+    console.log("Response status:", res.status);
+    return res.json();
+  })
+  .then(data => {
+    
+    console.log("Full response data:", data);
+    data.forEach(news => {
+      console.log("ID:", news.id);
+
+      news.locations.forEach(loc => {
+        console.log("Location:", loc.name);
+        console.log("Lat:", loc.lat);
+        console.log("Lon:", loc.lon);
+      });
+
+      console.log("------");
+    });
+   
+  })
+  .catch(err => {
+    console.error("Error fetching news:", err);
+  });
+  
 // Scene
 const scene = new THREE.Scene();
 
@@ -10,133 +36,132 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.x = 0;
-camera.position.y = 0;
-camera.position.z = 3;
+camera.position.set(0, 0, 3);
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-
-// Earth Geometry
+// Geometry
 const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
-const earth_c_geometry = new THREE.SphereGeometry(1.01, 64, 64);
-const bbox = new THREE.BoxGeometry(1, 1, 1); 
+const bboxGeometry = new THREE.SphereGeometry(0.05, 16, 16);
 
 // Texture
 const textureLoader = new THREE.TextureLoader();
 const earthTexture = textureLoader.load('earth nasa.jpg');
-//const earthCloudsTexture = textureLoader.load('earth_cloud.jpg');
 
-// Material
-const material = new THREE.MeshStandardMaterial({
-  map: earthTexture,
-  opacity: 1,
-  transparent: false
+// Materials
+const earthMaterial = new THREE.MeshStandardMaterial({
+  map: earthTexture
 });
-const cloudMaterial = new THREE.MeshStandardMaterial({
-  transparent: true,
-  opacity: 0.1
-});
+
 const bboxMaterial = new THREE.MeshStandardMaterial({
-  color: 0xff0000,
-  transparent: true,
-  opacity: 1,
+  color: 0xff0000
 });
-// Mesh
-const earth = new THREE.Mesh(earthGeometry, material);
+
+// Meshes
+const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(earth);
-const earthClouds = new THREE.Mesh(earth_c_geometry, cloudMaterial);
-scene.add(earthClouds);
-const box = new THREE.Mesh(bbox, bboxMaterial);
 
-scene.add(box);
+const box = new THREE.Mesh(bboxGeometry, bboxMaterial);
+earth.add(box); // IMPORTANT: attach to earth
 
-// Light (sun)
+// Rotate Earth to match texture orientation
+earth.rotation.y = -Math.PI/2;
+
+// Lights
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
 
-// Ambient light (soft fill)
-const ambientLight = new THREE.AmbientLight(0x333333);
-scene.add(ambientLight);
+scene.add(new THREE.AmbientLight(0x333333));
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();  
+// -----------------------------
+// 🌍 Coordinate Conversion
+// -----------------------------
 
-window.addEventListener('click', (event) => {
-
-  // 1. Convert mouse
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  // 2. Update ray
-  raycaster.setFromCamera(mouse, camera);
-
-  // 3. Intersect
-  const intersects = raycaster.intersectObject(earth);
-
-  if (intersects.length > 0) {
-    const point = intersects[0].point;
-    console.log("Hit:", point);
-  }
-
-});
-
-function degtocord(deg) {
-  const lat = deg.lat * (Math.PI / 180);
-  const lon = deg.lon * (Math.PI / 180);
-  return { lat, lon };
+function degToRad(lat, lon) {
+  return {
+    lat: lat * Math.PI / 180,
+    lon: lon * Math.PI / 180
+  };
 }
 
-function convert(lat, lon, radius) {
-  const { lat: latRad, lon: lonRad } = degtocord({ lat, lon });
-  const x = radius * Math.cos(latRad) * Math.cos(lonRad);
-  const y = radius * Math.cos(latRad) * Math.sin(lonRad);
-  const z = radius * Math.sin(latRad);
+// Correct for Three.js (Y is up)
+function latLonToXYZ(lat, lon, radius) {
+
+  const lonOffset = -0.0598;
+
+  const x = radius * Math.cos(lat) * Math.cos(lon + lonOffset);
+  const y = radius * Math.sin(lat);
+  const z = radius * Math.cos(lat) * Math.sin(lon + lonOffset);
+
   return new THREE.Vector3(x, y, z);
 }
 
-const position = convert(-10.333, -53.2, 1.01);
-box.scale.set(0.1, 0.1, 0.1);
+// -----------------------------
+// 📍 Place marker (New Delhi)
+// -----------------------------
+
+const { lat, lon } = degToRad(28.6139, 77.2088);
+
+const position = latLonToXYZ(lat, lon, 1);
+
+// push slightly above surface
 const normal = position.clone().normalize();
+const offset = 0.05;
 
-const offset = 0.09;
+box.position.copy(new THREE.Vector3(0.19435859243803824, 0.47890484319417903, 0.8560811227393484));
 
-box.position.copy(position.add(normal.multiplyScalar(offset)));
-
+// orient marker outward
 box.quaternion.setFromUnitVectors(
   new THREE.Vector3(0, 1, 0),
   normal
 );
 
-earth.add(box);
+// -----------------------------
+// 🎯 Raycaster (debug click)
+// -----------------------------
 
-//box.lookAt(0, 0, 0);
-//box.rotateX(Math.PI); // Example: New Delhi coordinates
-//box.position.copy(position);
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
-// Animation loop
+window.addEventListener('click', (event) => {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObject(earth);
+
+  if (intersects.length > 0) {
+    const point = intersects[0].point.clone().normalize();
+    console.log("Clicked point (normalized):", point);
+  }
+});
+
+// -----------------------------
+// 🔄 Animation
+// -----------------------------
+
 function animate() {
   requestAnimationFrame(animate);
 
-  // rotate earth
-  earth.rotation.y += 0.01;
-  //box.rotation.y += 0.01;
-  earthClouds.rotation.y -= 0.002;
-  //earthAtom.rotation.y += 0.0011; 
-  earth.rotation.z = 0.41;
-  //earthAtom.rotation.z = 0.41;
+  earth.rotation.y += 0.005;
+
   renderer.render(scene, camera);
 }
 
 animate();
 
-// Resize handling
+// -----------------------------
+// 📱 Resize
+// -----------------------------
+
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
+

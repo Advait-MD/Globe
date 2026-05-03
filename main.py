@@ -3,10 +3,21 @@ import httpx
 from dotenv import load_dotenv
 import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 
 load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
+
 GUARDIAN_API_KEY = os.getenv("API_KEY")
 ENDPOINT_URL = "https://content.guardianapis.com/search"
 
