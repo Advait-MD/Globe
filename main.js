@@ -73,9 +73,24 @@ function latLonToXYZ(lat, lon, radius) {
   return new THREE.Vector3(x, y, z);
 }
 
+function showDialog(data) {
+  const popup = document.getElementById("popup");
+
+  popup.style.display = "block";
+
+  popup.innerHTML = `
+    <p style="font-size:14px;">${data.headline}</p>
+    <a href="${data.url}" target="_blank" style="color:#4da6ff;">
+      Read full article →
+    </a>
+  `;
+}
+
 // -----------------------------
 // 🌍 FETCH + PLOT DATA
 // -----------------------------
+
+const markers = [];
 
 fetch("http://127.0.0.1:8000")
   .then(res => res.json())
@@ -92,6 +107,7 @@ fetch("http://127.0.0.1:8000")
 
       Locations.forEach(lo => {
 
+
         const lat = parseFloat(lo.lat);
         const lon = parseFloat(lo.lon);
 
@@ -106,6 +122,11 @@ fetch("http://127.0.0.1:8000")
         // 🔥 CREATE NEW MARKER PER LOCATION
         const marker = new THREE.Mesh(markerGeometry, markerMaterial);
 
+        marker.userData ={
+          headline : news.Headline,
+          url : news.WebURL
+        }
+
         marker.position.copy(
           position.clone().add(normal.multiplyScalar(offset))
         );
@@ -114,7 +135,8 @@ fetch("http://127.0.0.1:8000")
           new THREE.Vector3(0, 1, 0),
           normal
         );
-
+        
+        markers.push(marker);
         earth.add(marker);
 
         console.log("Placed:", lo.name);
@@ -133,17 +155,26 @@ fetch("http://127.0.0.1:8000")
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-window.addEventListener('click', (event) => {
+window.addEventListener('pointerdown', (event) => {
+
+  //event.stopPropagation();
+
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
 
-  const intersects = raycaster.intersectObject(earth);
+  const intersects = raycaster.intersectObjects(markers);
+  const popup = document.getElementById("popup");
+
+  popup.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
 
   if (intersects.length > 0) {
-    const point = intersects[0].point.clone().normalize();
-    console.log("Clicked point:", point);
+    showDialog(intersects[0].object.userData);
+  } else {
+    popup.style.display = "none";
   }
 });
 
@@ -160,6 +191,14 @@ function animate() {
 }
 
 animate();
+
+// This is the problem that not showing the popup
+
+//window.addEventListener("pointerdown", (e) => {
+  //if (!e.target.closest("#popup")) {
+   // document.getElementById("popup").style.display = "none";
+  //}
+//});
 
 // -----------------------------
 // 📱 RESIZE
