@@ -173,7 +173,8 @@ window.addEventListener('pointerdown', (event) => {
 
   if (intersects.length > 0) {
     showDialog(intersects[0].object.userData);
-  } else {
+    //this line put the difference
+  } else if (!popup.contains(event.target)) {
     popup.style.display = "none";
   }
 });
