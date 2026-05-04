@@ -85,6 +85,8 @@ fetch("http://127.0.0.1:8000")
 
     safeData.forEach(news => {
       console.log("ID:", news.id);
+      console.log("HeadLine:", news.Headline);
+      console.log("URL:", news.WebURL);
 
       const Locations = Array.isArray(news.Locations) ? news.Locations : [];
 
@@ -152,7 +154,7 @@ window.addEventListener('click', (event) => {
 function animate() {
   requestAnimationFrame(animate);
 
-  earth.rotation.y += 0.005;
+  earth.rotation.y += 0.0009;
 
   renderer.render(scene, camera);
 }
