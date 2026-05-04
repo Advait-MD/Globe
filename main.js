@@ -8,11 +8,14 @@ fetch("http://127.0.0.1:8000")
   })
   .then(data => {
     
-    console.log("Full response data:", data);
-    data.forEach(news => {
+    const safeData = Array.isArray(data) ? data : [data];
+    console.log("Full response data:", safeData);
+    safeData.forEach(news => {
       console.log("ID:", news.id);
 
-      news.locations.forEach(loc => {
+      const Locations = Array.isArray(news.Locations) ? news.Locations : [];
+
+      Locations.forEach(loc => {
         console.log("Location:", loc.name);
         console.log("Lat:", loc.lat);
         console.log("Lon:", loc.lon);
