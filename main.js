@@ -1,38 +1,11 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js';
 
+// -----------------------------
+// 🎬 SCENE SETUP
+// -----------------------------
 
-fetch("http://127.0.0.1:8000")
-  .then(res => {
-    console.log("Response status:", res.status);
-    return res.json();
-  })
-  .then(data => {
-    
-    const safeData = Array.isArray(data) ? data : [data];
-    console.log("Full response data:", safeData);
-    safeData.forEach(news => {
-      console.log("ID:", news.id);
-
-      const Locations = Array.isArray(news.Locations) ? news.Locations : [];
-
-      Locations.forEach(loc => {
-        console.log("Location:", loc.name);
-        console.log("Lat:", loc.lat);
-        console.log("Lon:", loc.lon);
-      });
-
-      console.log("------");
-    });
-   
-  })
-  .catch(err => {
-    console.error("Error fetching news:", err);
-  });
-  
-// Scene
 const scene = new THREE.Scene();
 
-// Camera
 const camera = new THREE.PerspectiveCamera(
   65,
   window.innerWidth / window.innerHeight,
@@ -41,39 +14,38 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.set(0, 0, 3);
 
-// Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Geometry
-const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
-const bboxGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+// -----------------------------
+// 🌍 EARTH
+// -----------------------------
 
-// Texture
+const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+const markerGeometry = new THREE.SphereGeometry(0.04, 16, 16);
+
 const textureLoader = new THREE.TextureLoader();
 const earthTexture = textureLoader.load('earth nasa.jpg');
 
-// Materials
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: earthTexture
 });
 
-const bboxMaterial = new THREE.MeshStandardMaterial({
+const markerMaterial = new THREE.MeshStandardMaterial({
   color: 0xff0000
 });
 
-// Meshes
 const earth = new THREE.Mesh(earthGeometry, earthMaterial);
 scene.add(earth);
 
-const box = new THREE.Mesh(bboxGeometry, bboxMaterial);
-earth.add(box); // IMPORTANT: attach to earth
+// rotate to match texture
+earth.rotation.y = -Math.PI / 2;
 
-// Rotate Earth to match texture orientation
-earth.rotation.y = -Math.PI/2;
+// -----------------------------
+// 💡 LIGHTS
+// -----------------------------
 
-// Lights
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 3, 5);
 scene.add(light);
@@ -81,7 +53,7 @@ scene.add(light);
 scene.add(new THREE.AmbientLight(0x333333));
 
 // -----------------------------
-// 🌍 Coordinate Conversion
+// 🌐 COORDINATE FUNCTIONS
 // -----------------------------
 
 function degToRad(lat, lon) {
@@ -91,9 +63,7 @@ function degToRad(lat, lon) {
   };
 }
 
-// Correct for Three.js (Y is up)
 function latLonToXYZ(lat, lon, radius) {
-
   const lonOffset = -0.0598;
 
   const x = radius * Math.cos(lat) * Math.cos(lon + lonOffset);
@@ -104,27 +74,58 @@ function latLonToXYZ(lat, lon, radius) {
 }
 
 // -----------------------------
-// 📍 Place marker (New Delhi)
+// 🌍 FETCH + PLOT DATA
 // -----------------------------
 
-const { lat, lon } = degToRad(28.6139, 77.2088);
+fetch("http://127.0.0.1:8000")
+  .then(res => res.json())
+  .then(data => {
 
-const position = latLonToXYZ(lat, lon, 1);
+    const safeData = Array.isArray(data) ? data : [data];
 
-// push slightly above surface
-const normal = position.clone().normalize();
-const offset = 0.05;
+    safeData.forEach(news => {
+      console.log("ID:", news.id);
 
-box.position.copy(new THREE.Vector3(0.19435859243803824, 0.47890484319417903, 0.8560811227393484));
+      const Locations = Array.isArray(news.Locations) ? news.Locations : [];
 
-// orient marker outward
-box.quaternion.setFromUnitVectors(
-  new THREE.Vector3(0, 1, 0),
-  normal
-);
+      Locations.forEach(lo => {
+
+        const lat = parseFloat(lo.lat);
+        const lon = parseFloat(lo.lon);
+
+        if (isNaN(lat) || isNaN(lon)) return;
+
+        const { lat: rLat, lon: rLon } = degToRad(lat, lon);
+        const position = latLonToXYZ(rLat, rLon, 1);
+
+        const normal = position.clone().normalize();
+        const offset = 0.05;
+
+        // 🔥 CREATE NEW MARKER PER LOCATION
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+
+        marker.position.copy(
+          position.clone().add(normal.multiplyScalar(offset))
+        );
+
+        marker.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          normal
+        );
+
+        earth.add(marker);
+
+        console.log("Placed:", lo.name);
+      });
+
+      console.log("------");
+    });
+
+  })
+  .catch(err => console.error("Fetch error:", err));
 
 // -----------------------------
-// 🎯 Raycaster (debug click)
+// 🎯 RAYCAST DEBUG (optional)
 // -----------------------------
 
 const raycaster = new THREE.Raycaster();
@@ -140,12 +141,12 @@ window.addEventListener('click', (event) => {
 
   if (intersects.length > 0) {
     const point = intersects[0].point.clone().normalize();
-    console.log("Clicked point (normalized):", point);
+    console.log("Clicked point:", point);
   }
 });
 
 // -----------------------------
-// 🔄 Animation
+// 🔄 ANIMATION
 // -----------------------------
 
 function animate() {
@@ -159,7 +160,7 @@ function animate() {
 animate();
 
 // -----------------------------
-// 📱 Resize
+// 📱 RESIZE
 // -----------------------------
 
 window.addEventListener('resize', () => {
@@ -167,4 +168,3 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
-
