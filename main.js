@@ -26,7 +26,7 @@ const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
 const markerGeometry = new THREE.SphereGeometry(0.04, 16, 16);
 
 const textureLoader = new THREE.TextureLoader();
-const earthTexture = textureLoader.load('earth nasa.jpg');
+const earthTexture = textureLoader.load('earth name.png');
 
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: earthTexture
