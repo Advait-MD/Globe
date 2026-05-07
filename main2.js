@@ -227,8 +227,8 @@ function latLonToXYZ(lat, lon, radius) {
   const lonOffset = -0.0598;
 
   const x = radius * Math.cos(lat) * Math.cos(lon + lonOffset);
-  const y = radius * Math.cos(lat) * Math.sin(lon + lonOffset);
-  const z = radius * Math.sin(lat);
+  const y = radius * Math.sin(lat);
+  const z = radius * Math.cos(lat) * Math.sin(lon + lonOffset);
 
   return new THREE.Vector3(x, y, z);
 }
