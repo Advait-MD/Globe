@@ -14,25 +14,35 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+// TEXTURE, MATERIAL AND MESH
+
 const textureLoader = new THREE.TextureLoader();
 
 const earthGeometry = new THREE.SphereGeometry(1, 62, 62);
-const earth_layer = new THREE.SphereGeometry(1, 62, 62);
 const markerGeometry = new THREE.SphereGeometry(0.04, 16, 16);
+
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: textureLoader.load('earth pix2.png')
-});
-const earthLayerMaterial = new THREE.MeshStandardMaterial({
-  transparent: true,
-  opacity: 0.1,
 });
 const markerMaterial = new THREE.MeshStandardMaterial({
   color: 0xff0000
 });
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-  
-// Orbit Control Implementation
+
+const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+
+// LIGHTING
+
+const light = new THREE.DirectionalLight(0xffffff, 2);
+light.position.set(5, 3, 5);
+scene.add(light);
+
+const glow =  new THREE.AmbientLight( 0x404040);
+
+scene.add( glow );
+scene.add(earth);
+
+// ORBIT CONTROL IMPLEMENTATION
+
 const orbitControl = {
   enabled: true,
   autoRotate: true,
@@ -153,18 +163,7 @@ const orbitControl = {
 
 orbitControl.init();
 
-const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-scene.add(earth);
-
-const earthLayer = new THREE.Mesh(earth_layer, earthLayerMaterial);
-scene.add(earthLayer);
-
-const light = new THREE.DirectionalLight(0xffffff, 2);
-light.position.set(5, 3, 5);
-scene.add(light);
-
-const glow =  new THREE.AmbientLight( 0x404040);
-scene.add( glow );
+// STARS BACKGROUND
 
 const starCount = 6000;
 const starGeometry = new THREE.BufferGeometry();
@@ -188,7 +187,6 @@ const starMaterial = new THREE.PointsMaterial({
 });
 
 const stars = new THREE.Points(starGeometry, starMaterial);
-
 
 function createStarLayer(count, size, spread) {
   const geo = new THREE.BufferGeometry();
@@ -248,7 +246,7 @@ function showDialog(data) {
   `;
 }
 
-// PLOT FUNCTION AND FETCH DATA
+// FETCH DATA AND PLOT
 
 const markers = [];
 
@@ -279,7 +277,7 @@ fetch("http://127.0.0.1:8000")
         const normal = position.clone().normalize();
         const offset = 0.05;
 
-        // 🔥 CREATE NEW MARKER PER LOCATION
+        //  CREATE NEW MARKER PER LOCATION
         const marker = new THREE.Mesh(markerGeometry, markerMaterial);
 
         marker.userData ={
@@ -308,6 +306,9 @@ fetch("http://127.0.0.1:8000")
   })
   .catch(err => console.error("Fetch error:", err));
 
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();  
+
 window.addEventListener('pointerdown', (event) => {
 
   //event.stopPropagation();
@@ -332,12 +333,13 @@ window.addEventListener('pointerdown', (event) => {
   }
 });
 
+// ANIMATION LOOP
+
 function animate() {
   requestAnimationFrame(animate);
 
- // earth.rotation.y += 0.002;
-  //earthLayer.rotation.y += 0.002;
-
+  earth.rotation.y += 0.002;
+  
   stars.rotation.z += 0.00020;
   stars.rotation.y = 0.001;
 
