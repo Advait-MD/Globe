@@ -18,6 +18,7 @@ const textureLoader = new THREE.TextureLoader();
 
 const earthGeometry = new THREE.SphereGeometry(1, 62, 62);
 const earth_layer = new THREE.SphereGeometry(1, 62, 62);
+const markerGeometry = new THREE.SphereGeometry(0.04, 16, 16);
 const earthMaterial = new THREE.MeshStandardMaterial({
   map: textureLoader.load('earth pix2.png')
 });
@@ -25,27 +26,11 @@ const earthLayerMaterial = new THREE.MeshStandardMaterial({
   transparent: true,
   opacity: 0.1,
 });
+const markerMaterial = new THREE.MeshStandardMaterial({
+  color: 0xff0000
+});
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-
-window.addEventListener('click', (event) => {
-
-  // 1. Convert mouse
-  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  // 2. Update ray
-  raycaster.setFromCamera(mouse, camera);
-
-  // 3. Intersect
-  const intersects = raycaster.intersectObject(earth);
-
-  if (intersects.length > 0) {
-    const point = intersects[0].point;
-    console.log("Hit:", point);
-  }
-
-});
   
 // Orbit Control Implementation
 const orbitControl = {
@@ -230,6 +215,122 @@ const starsMid = createStarLayer(2000, 1.2, 1500);
 scene.add(stars);
 scene.add(starsFar);
 scene.add(starsMid);
+
+// COORDINATE FUNCTIONS
+
+function degToRad(lat, lon) {
+  return {
+    lat: lat * Math.PI / 180,
+    lon: lon * Math.PI / 180
+  };
+}
+
+function latLonToXYZ(lat, lon, radius) {
+  const lonOffset = -0.0598;
+
+  const x = radius * Math.cos(lat) * Math.cos(lon + lonOffset);
+  const y = radius * Math.sin(lat);
+  const z = radius * Math.cos(lat) * Math.sin(lon + lonOffset);
+
+  return new THREE.Vector3(x, y, z);
+}
+
+function showDialog(data) {
+  const popup = document.getElementById("popup");
+
+  popup.style.display = "block";
+
+  popup.innerHTML = `
+    <p style="font-size:14px;">${data.headline}</p>
+    <a href="${data.url}" target="_blank" style="color:#4da6ff;">
+      Read full article →
+    </a>
+  `;
+}
+
+// PLOT FUNCTION AND FETCH DATA
+
+const markers = [];
+
+fetch("http://127.0.0.1:8000")
+  .then(res => res.json())
+  .then(data => {
+
+    const safeData = Array.isArray(data) ? data : [data];
+
+    safeData.forEach(news => {
+      console.log("ID:", news.id);
+      console.log("HeadLine:", news.Headline);
+      console.log("URL:", news.WebURL);
+
+      const Locations = Array.isArray(news.Locations) ? news.Locations : [];
+
+      Locations.forEach(lo => {
+
+
+        const lat = parseFloat(lo.lat);
+        const lon = parseFloat(lo.lon);
+
+        if (isNaN(lat) || isNaN(lon)) return;
+
+        const { lat: rLat, lon: rLon } = degToRad(lat, lon);
+        const position = latLonToXYZ(rLat, rLon, 1);
+
+        const normal = position.clone().normalize();
+        const offset = 0.05;
+
+        // 🔥 CREATE NEW MARKER PER LOCATION
+        const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+
+        marker.userData ={
+          headline : news.Headline,
+          url : news.WebURL
+        }
+
+        marker.position.copy(
+          position.clone().add(normal.multiplyScalar(offset))
+        );
+
+        marker.quaternion.setFromUnitVectors(
+          new THREE.Vector3(0, 1, 0),
+          normal
+        );
+        
+        markers.push(marker);
+        earth.add(marker);
+
+        console.log("Placed:", lo.name);
+      });
+
+      console.log("------");
+    });
+
+  })
+  .catch(err => console.error("Fetch error:", err));
+
+window.addEventListener('pointerdown', (event) => {
+
+  //event.stopPropagation();
+
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(markers);
+  const popup = document.getElementById("popup");
+
+  popup.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  if (intersects.length > 0) {
+    showDialog(intersects[0].object.userData);
+    //this line put the difference
+  } else if (!popup.contains(event.target)) {
+    popup.style.display = "none";
+  }
+});
 
 function animate() {
   requestAnimationFrame(animate);
