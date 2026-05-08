@@ -1,6 +1,10 @@
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
-uri = "mongodb+srv://advait-md:NKP76qP8Xe8MWreW@core-cluster0.hh04wn2.mongodb.net/?appName=CORE-Cluster0"
+load_dotenv()
+
+uri = os.getenv("MONGO_URI")
 
 client = MongoClient(uri)
 
@@ -13,12 +17,6 @@ collection.insert_one({
     "skills": ["C++", "ML"]
 })
 
-data = collection.find()
+#result = collection.find_one({"name": "Advait"})
 
-collection.update_one(
-    {"name": "Advait"},
-    {"$set": {"age": 20}}
-)
-
-result = collection.find_one({"name": "Advait"})
-
+#collection.delete_one({"name":"Advait"})
