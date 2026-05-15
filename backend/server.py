@@ -7,6 +7,8 @@ from fastapi import FastAPI, HTTPException
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 from fastapi.middleware.cors import CORSMiddleware
+from passlib.context import CryptContext
+from pydantic import BaseModel
 
 # 🔹 Load env variables
 load_dotenv()
@@ -21,7 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True,
 )
-
 # 🔹 API config
 GUARDIAN_API_KEY = os.getenv("API_KEY")
 ENDPOINT_URL = "https://content.guardianapis.com/search"
