@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export  function World(){
+export function World(){
     const mountRef = useRef(null);
 
     useEffect(() =>{
@@ -347,13 +347,13 @@ export  function World(){
           earth.rotation.y += 0.002;
           
           stars.rotation.z += 0.00020;
-          stars.rotation.y = 0.001;
+          stars.rotation.y = 0.0001;
         
           starsMid.rotation.z += 0.00022;
-          starsMid.rotation.y += 0.001;
+          starsMid.rotation.y += 0.0001;
           
           starsFar.rotation.z += 0.00024;
-          starsFar.rotation.y -= 0.001;
+          starsFar.rotation.y -= 0.0001;
         
           // Update orbit control
           orbitControl.update();
@@ -454,13 +454,13 @@ export default function Openpage(){
           requestAnimationFrame(animate);
         
           stars.rotation.z += 0.00020;
-          stars.rotation.y = 0.001;
+          stars.rotation.y = 0.0001;
         
           starsMid.rotation.z += 0.00022;
-          starsMid.rotation.y += 0.001;
+          starsMid.rotation.y += 0.0001;
           
           starsFar.rotation.z += 0.00024;
-          starsFar.rotation.y -= 0.001;
+          starsFar.rotation.y -= 0.0001;
         
           renderer.render(scene, camera);
         }
