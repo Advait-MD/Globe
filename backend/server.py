@@ -24,7 +24,7 @@ app = FastAPI()
 #database setup
 Base.metadata.create_all(bind=engine)
 
-app.add_middleware(CORSMiddleware,allow_origins=["*"],allow_credentials=True,allow_methods=["*"],allow_headers=["*"],)
+app.add_middleware(CORSMiddleware,allow_origins=["https://globe-mocha-eta.vercel.app"],allow_credentials=True,allow_methods=["*"],allow_headers=["*"],)
 
 def get_db():
 

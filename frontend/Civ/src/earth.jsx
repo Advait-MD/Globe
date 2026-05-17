@@ -31,7 +31,7 @@ export default function World(){
         const earthGeometry=new THREE.SphereGeometry(1,62,62);
         const markerGeometry =new THREE.SphereGeometry(0.04,16,16);
 
-        const earthMaterial =new THREE.MeshStandardMaterial({map: textureLoader.load("/graphics/earth pix2.png") });
+        const earthMaterial =new THREE.MeshStandardMaterial({map: textureLoader.load("/graphics/earthpix2.png") });
 
         const markerMaterial =new THREE.MeshStandardMaterial({color: 0xff0000 });
 
