@@ -14,15 +14,6 @@ export default function Login(){
  // username and password
  const[username, setUsername] = useState("");
  const[password, setPassword] = useState("");
-
- if(isSignup){
-    return <Signup setIsSignup={setIsSignup} setIsLoggedIn={setIsLoggedIn} />;
- }
-
- if(isLoggedIn){
-  return<World setIsLoggedIn={setIsLoggedIn} />;
- }
-
  //login function
 
  async function handleLogin(){
@@ -51,7 +42,7 @@ export default function Login(){
 
     if(response.ok){
       toast.success("Login successful");
-      localStorage.setItem(username, username);
+      localStorage.setItem("username", username);
       setIsLoggedIn(true);
     }
     else{
@@ -69,7 +60,8 @@ export default function Login(){
   return(
     <div className="relative h-screen w-screen">
       <Toaster />
-    
+    {!isSignup && !isLoggedIn && (
+      <>
     <Openpage />
     
     
@@ -97,12 +89,15 @@ export default function Login(){
 
       <button
         className="text-white underline hover:text-blue-400 transition"
-        onClick={() => setIsSignup(true)}
-        >
+        onClick={() => { toast.dismiss(); setIsSignup(true); }} >
          Don't have an account? Sign Up
       </button>
     </div>
     </div>
+    </>
+    )}
+    {isSignup && !isLoggedIn && (<Signup setIsSignup={setIsSignup} setIsLoggedIn={setIsLoggedIn} />)}
+    {isLoggedIn && (<World />)}
     </div>
   );
 }
