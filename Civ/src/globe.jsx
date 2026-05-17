@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import Profile from "./profile.jsx";
 import * as THREE from "three";
 
 export function World(){
@@ -370,7 +371,9 @@ export function World(){
     }, []);
 
     return(
-        <div ref={mountRef}></div>
+        <div ref={mountRef}>
+          <Profile/>
+        </div>
     );
 }
 

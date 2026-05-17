@@ -1,3 +1,4 @@
+from operator import add
 import os
 import asyncio
 import httpx
@@ -320,3 +321,34 @@ def save_preference(
     return {
         "message": "Preference saved successfully"
     }
+
+@app.delete("/delete-account/{username}")
+
+def delete_account(
+    username:str,
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.username == username).first()
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+    db.delete(user) 
+    db.commit()
+    return{"message": "Account terminated"}
+
+@app.get("/get-preference/{username}")
+
+def get_preference(
+    username:str,
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(User.username == username).first()
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+    return{"preference": user.preference}
+
