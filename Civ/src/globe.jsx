@@ -3,6 +3,7 @@ import * as THREE from "three";
 
 export function World(){
     const mountRef = useRef(null);
+    const username = localStorage.getItem("username");
 
     useEffect(() =>{
 
@@ -256,7 +257,7 @@ export function World(){
         
         const markers = [];
         
-        fetch("http://127.0.0.1:8000")
+        fetch(`http://127.0.0.1:8000/news/${username}`)
           .then(res => res.json())
           .then(data => {
         

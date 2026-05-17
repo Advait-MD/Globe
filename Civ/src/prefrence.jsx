@@ -1,0 +1,81 @@
+import Openpage from "./globe.jsx";
+import {Toaster} from "react-hot-toast";
+import toast from "react-hot-toast";
+import {useState} from "react";
+
+export default function Preference({setIsLoggedIn}){
+    const category =["world","sport","technology"];
+    const [preference, setPreference] = useState("");
+    const [loading, setLoading] = useState(false);
+    const username = localStorage.getItem("username");
+    
+    async function savePrefrences(){
+ try{
+    setLoading(true);
+    const response = await fetch(
+      "http://127.0.0.1:8000/save-preference",
+      {
+        method: "POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify({
+          username,
+          preference: preference
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if(response.ok){
+
+      toast.success("Preference saved");
+
+      localStorage.setItem(
+        "username",
+        username
+      );
+      setTimeout(() => {
+        console.log("Setting logged in");
+        setIsLoggedIn(true);
+      }, 20);
+    }
+
+    else{
+      toast.error(data.detail);
+    }
+
+  } catch(error){
+
+    console.log(error);
+
+    toast.error("Server error");
+  }
+    }
+    return(
+        <div className="relative h-screen w-screen">
+            <Toaster />
+            <Openpage />
+            <div className=" absolute inset-0 flex justify-center items-center z-10">
+            <div className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-6">
+                <h1 className="text-3xl font-bold text-white">Preference Page</h1>
+                
+                {category.map((cat) => (
+                     <label key={cat} className="text-white">
+                        <input type="radio" name="selpref" value={cat} checked={preference === cat} onChange={(e) => setPreference(e.target.value)}
+                        className="h-5 w-5 accent-blue-500" />
+                    <span className="capitalize">{cat}</span>
+                    </label>
+                ))}
+                <button onClick={savePrefrences} disabled={!preference || loading} className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    {loading ? "Saving..." : "Save Preference"}
+                </button>
+            </div>
+        </div>
+      </div>  
+    );
+}    
+                 

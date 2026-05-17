@@ -3,108 +3,41 @@ import asyncio
 import httpx
 import spacy
 import bcrypt
-
 from dotenv import load_dotenv
-
-from fastapi import (
-    FastAPI,
-    HTTPException,
-    Depends
-)
-
+from fastapi import (FastAPI,HTTPException,Depends)
 from sqlalchemy.orm import Session
-
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
-
 from fastapi.middleware.cors import CORSMiddleware
-
-from database import (
-    SessionLocal,
-    engine,
-    Base
-)
-
+from database import(SessionLocal,engine,Base)
 from models import User
-from schemas import UserCreate
-
-
-# =========================================
-# LOAD ENV
-# =========================================
+from schemas import UserCreate, PreferenceData
 
 load_dotenv()
 
 GUARDIAN_API_KEY = os.getenv("API_KEY")
-
 ENDPOINT_URL = "https://content.guardianapis.com/search"
-
-
-# =========================================
-# FASTAPI APP
-# =========================================
 
 app = FastAPI()
 
-
-# =========================================
-# DATABASE
-# =========================================
-
+#database setup
 Base.metadata.create_all(bind=engine)
 
-
-# =========================================
-# CORS
-# =========================================
-
-app.add_middleware(
-    CORSMiddleware,
-
-    allow_origins=["*"],
-
-    allow_credentials=True,
-
-    allow_methods=["*"],
-
-    allow_headers=["*"],
-)
-
-
-# =========================================
-# DATABASE SESSION
-# =========================================
+app.add_middleware(CORSMiddleware,allow_origins=["*"],allow_credentials=True,allow_methods=["*"],allow_headers=["*"],)
 
 def get_db():
 
     db = SessionLocal()
-
     try:
         yield db
-
     finally:
         db.close()
 
-
-# =========================================
-# SPACY NLP
-# =========================================
-
 nlp = spacy.load("en_core_web_sm")
 
+geolocator = Nominatim(user_agent="fastapi-news-app")
 
-# =========================================
-# GEOLOCATOR
-# =========================================
-
-geolocator = Nominatim(
-    user_agent="fastapi-news-app"
-)
-
-geocode = RateLimiter(
-    geolocator.geocode,
-    min_delay_seconds=1
-)
+geocode = RateLimiter(geolocator.geocode,min_delay_seconds=1)
 
 
 # =========================================
@@ -156,15 +89,40 @@ async def get_coordinates(location):
 # ROOT ROUTE
 # =========================================
 
-@app.get("/")
-async def get_latest_news_with_locations():
+@app.get("/news/{username}")
+async def get_latest_news_with_locations(
+    username: str,
+    db: Session = Depends(get_db)
+):
 
+    # Find user
+    user = db.query(User).filter(
+        User.username == username
+    ).first()
+
+    # User not found
+    if not user:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    # Get user preference
+    preference = user.preference
+
+    # Guardian API params
     params = {
+
         "api-key": GUARDIAN_API_KEY,
+
         "page-size": 10,
+
         "order-by": "newest",
+
         "show-fields": "trailText,headline",
-        "section": "world"
+
+        "section": preference
     }
 
     async with httpx.AsyncClient(
@@ -331,4 +289,33 @@ def login(
 
     return {
         "message": "Login successful"
+    }
+
+@app.post("/save-preference")
+def save_preference(
+    data: PreferenceData,
+    db: Session = Depends(get_db)
+):
+
+    # Find user
+    user = db.query(User).filter(
+        User.username == data.username
+    ).first()
+
+    # If user not found
+    if not user:
+
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    # Save preference
+    user.preference = data.preference
+
+    # Commit changes
+    db.commit()
+
+    return {
+        "message": "Preference saved successfully"
     }

@@ -1,14 +1,15 @@
 import Openpage from "./globe";
+import Preference from "./prefrence";
 import {Toaster} from "react-hot-toast";
 import toast from "react-hot-toast";
 import {useState} from "react";
 
-export default function Signup({setIsSignup}){
-
-    
+export default function Signup({setIsSignup, setIsLoggedIn}){
 
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
+
+    const [showPreference, setShowPreference] = useState(false);
 
     //sigup function
     async function handleSignup(){
@@ -37,7 +38,7 @@ export default function Signup({setIsSignup}){
 
     if(response.ok){
       toast.success("Signup successful");
-      setIsSignup(false);
+      setShowPreference(true);
     }
     else{
       toast.error(data.detail);
@@ -51,6 +52,10 @@ export default function Signup({setIsSignup}){
   }
 }
 
+if(showPreference){
+  localStorage.setItem("username", username);
+  return<Preference setIsLoggedIn={setIsLoggedIn} />;
+}
 // signup rendering
     return(
         <div className="relative h-screen w-screen">

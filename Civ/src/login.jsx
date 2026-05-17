@@ -16,11 +16,11 @@ export default function Login(){
  const[password, setPassword] = useState("");
 
  if(isSignup){
-    return <Signup setIsSignup={setIsSignup} />;
+    return <Signup setIsSignup={setIsSignup} setIsLoggedIn={setIsLoggedIn} />;
  }
 
  if(isLoggedIn){
-  return<World />;
+  return<World setIsLoggedIn={setIsLoggedIn} />;
  }
 
  //login function
@@ -51,6 +51,7 @@ export default function Login(){
 
     if(response.ok){
       toast.success("Login successful");
+      localStorage.setItem(username, username);
       setIsLoggedIn(true);
     }
     else{
