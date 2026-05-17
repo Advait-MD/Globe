@@ -70,7 +70,13 @@ export default function Profile({ refreshNews }){
         localStorage.removeItem("username");
         window.location.reload();
     }
+     
+    function closeProfile(){
 
+    window.profileOpen = false;
+
+    setShowProfile(false);
+}
     async function deleteAccount(){
         try{
             const response = await fetch(`http://127.0.0.1:8000/delete-account/${username}`,
@@ -95,189 +101,205 @@ export default function Profile({ refreshNews }){
 
     return(
 
-      <>
+   <>
 
-         <button
+      <button
 
-            onClick={() =>
-               setShowProfile(true)
+         onClick={() => {
+
+            window.profileOpen = true;
+
+            setShowProfile(true);
+         }}
+
+         className="
+            absolute
+            top-5
+            right-5
+            z-20
+            bg-white/10
+            backdrop-blur-md
+            border border-white/20
+            text-white
+            px-4
+            py-2
+            rounded-xl
+            hover:bg-white/20
+            transition
+         "
+      >
+
+         {username}
+
+      </button>
+
+      {showProfile && (
+
+         <div
+
+            onClick={closeProfile}
+
+            onPointerDown={(e) =>
+               e.stopPropagation()
             }
 
             className="
-               absolute
-               top-5
-               right-5
-               z-20
-               bg-white/10
-               backdrop-blur-md
-               border border-white/20
-               text-white
-               px-4
-               py-2
-               rounded-xl
-               hover:bg-white/20
-               transition
+               fixed
+               inset-0
+               flex
+               justify-center
+               items-center
+               bg-black/40
+               z-50
             "
          >
 
-            {username}
-
-         </button>
-
-         {showProfile && (
-
             <div
+
+               onClick={(e) =>
+                  e.stopPropagation()
+               }
+
                className="
-                  absolute
-                  inset-0
+                  bg-white/10
+                  backdrop-blur-md
+                  border border-white/20
+                  rounded-2xl
+                  p-8
                   flex
-                  justify-center
-                  items-center
-                  bg-black/40
-                  z-30
+                  flex-col
+                  gap-5
+                  text-white
+                  min-w-[350px]
                "
             >
 
-               <div
+               <h1 className="text-2xl font-bold">
+
+                  Profile Settings
+
+               </h1>
+
+               {[
+                  "environment",
+                  "sport",
+                  "technology"
+               ].map((cat) => (
+
+                  <label
+
+                     key={cat}
+
+                     className="
+                        flex
+                        items-center
+                        gap-3
+                     "
+                  >
+
+                     <input
+
+                        type="radio"
+
+                        value={cat}
+
+                        checked={
+                           preference === cat
+                        }
+
+                        onChange={(e) =>
+                           setPreference(
+                              e.target.value
+                           )
+                        }
+
+                        className="
+                           accent-blue-500
+                        "
+                     />
+
+                     <span className="capitalize">
+
+                        {cat}
+
+                     </span>
+
+                  </label>
+
+               ))}
+
+               <button
+
+                  onClick={updatePreference}
+
                   className="
-                     bg-white/10
-                     backdrop-blur-md
-                     border border-white/20
-                     rounded-2xl
-                     p-8
-                     flex
-                     flex-col
-                     gap-5
-                     text-white
-                     min-w-[350px]
+                     bg-blue-600
+                     p-3
+                     rounded-lg
+                     hover:bg-blue-700
+                     transition
                   "
                >
 
-                  <h1 className="text-2xl font-bold">
+                  Save Preference
 
-                     Profile Settings
+               </button>
 
-                  </h1>
+               <button
 
-                  {[
-                     "world",
-                     "sport",
-                     "technology"
-                  ].map((cat) => (
+                  onClick={logout}
 
-                     <label
-                        key={cat}
-                        className="
-                           flex
-                           items-center
-                           gap-3
-                        "
-                     >
+                  className="
+                     bg-yellow-600
+                     p-3
+                     rounded-lg
+                     hover:bg-yellow-700
+                     transition
+                  "
+               >
 
-                        <input
-                           type="radio"
+                  Logout
 
-                           value={cat}
+               </button>
 
-                           checked={
-                              preference === cat
-                           }
+               <button
 
-                           onChange={(e) =>
-                              setPreference(
-                                 e.target.value
-                              )
-                           }
+                  onClick={deleteAccount}
 
-                           className="
-                              accent-blue-500
-                           "
-                        />
+                  className="
+                     bg-red-600
+                     p-3
+                     rounded-lg
+                     hover:bg-red-700
+                     transition
+                  "
+               >
 
-                        <span className="capitalize">
+                  Delete Account
 
-                           {cat}
+               </button>
 
-                        </span>
+               <button
 
-                     </label>
+                  onClick={closeProfile}
 
-                  ))}
+                  className="
+                     text-gray-300
+                     hover:text-white
+                  "
+               >
 
-                  <button
+                  Close
 
-                     onClick={updatePreference}
-
-                     className="
-                        bg-blue-600
-                        p-3
-                        rounded-lg
-                        hover:bg-blue-700
-                        transition
-                     "
-                  >
-
-                     Save Preference
-
-                  </button>
-
-                  <button
-
-                     onClick={logout}
-
-                     className="
-                        bg-yellow-600
-                        p-3
-                        rounded-lg
-                        hover:bg-yellow-700
-                        transition
-                     "
-                  >
-
-                     Logout
-
-                  </button>
-
-                  <button
-
-                     onClick={deleteAccount}
-
-                     className="
-                        bg-red-600
-                        p-3
-                        rounded-lg
-                        hover:bg-red-700
-                        transition
-                     "
-                  >
-
-                     Delete Account
-
-                  </button>
-
-                  <button
-
-                     onClick={() =>
-                        setShowProfile(false)
-                     }
-
-                     className="
-                        text-gray-300
-                        hover:text-white
-                     "
-                  >
-
-                     Close
-
-                  </button>
-
-               </div>
+               </button>
 
             </div>
 
-         )}
+         </div>
 
-      </>
+      )}
 
-   );
+   </>
+
+);
 }

@@ -1,5 +1,5 @@
-import Openpage from "./globe";
-import Preference from "./prefrence";
+import Stars from "./sky.jsx";
+//import Preference from "./prefrence";
 import toast from "react-hot-toast";
 import {useState} from "react";
 
@@ -57,7 +57,7 @@ export default function Signup({setPage}){
 // signup rendering
     return(
         <div className="relative h-screen w-screen"> 
-            <Openpage />
+            <Stars />
         <div className=" absolute inset-0 flex justify-center items-center z-10">
         <div className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-6">
 

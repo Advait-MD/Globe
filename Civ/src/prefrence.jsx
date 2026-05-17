@@ -1,10 +1,10 @@
-import Openpage from "./globe.jsx";
-import World from "./earth.jsx";
+import Stars from "./sky.jsx";
+//import World from "./earth.jsx";
 import toast from "react-hot-toast";
 import {useState} from "react";
 
 export default function Preference({setPage}){
-    const category =["world","sport","technology"];
+    const category =["environment","sport","technology"];
     const [preference, setPreference] = useState("");
     const [loading, setLoading] = useState(false);
     const username = localStorage.getItem("username");
@@ -57,7 +57,7 @@ export default function Preference({setPage}){
     }
     return(
         <div className="relative h-screen w-screen">
-            <Openpage />
+            <Stars />
             <div className=" absolute inset-0 flex justify-center items-center z-10">
             <div className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-6">
                 <h1 className="text-3xl font-bold text-white">Preference Page</h1>

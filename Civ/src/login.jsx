@@ -1,4 +1,4 @@
-import Openpage from "./globe.jsx";
+import Stars from "./sky.jsx";
 import Signup from "./signup.jsx";
 import toast from "react-hot-toast";
 import World from "./earth.jsx";
@@ -68,7 +68,7 @@ export default function Login(){
     <div className="relative h-screen w-screen">
       {page === "login" && (
       <>
-    <Openpage />
+    <Stars />
     
     
     <div className="absolute inset-0 flex justify-center items-center z-10">
