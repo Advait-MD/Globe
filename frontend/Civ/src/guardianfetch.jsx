@@ -10,7 +10,7 @@ export default async function fetchNews({username, earth, markers, markerGeometr
                 markers.length = 0;
     
                 try{
-                    const response =await fetch(`http://127.0.0.1:8000/news/${username}`);
+                    const response =await fetch(`https://globe-2-i1ty.onrender.com/news/${username}`);
                     const data =await response.json();
                     const safeData = Array.isArray(data)?data:[data];
     

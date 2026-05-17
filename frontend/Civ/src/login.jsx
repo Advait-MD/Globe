@@ -20,7 +20,7 @@ export default function Login(){
   try{
 
     const response = await fetch(
-      "http://127.0.0.1:8000/login",
+      "https://globe-2-i1ty.onrender.com/login",
       {
         method: "POST",
 
@@ -41,7 +41,7 @@ export default function Login(){
 
     if(response.ok){
       toast.dismiss();
-      toast.dismiss
+      toast.dismiss();
       toast.success("Login successful");
       localStorage.setItem("username", username);
       if(data.hasPreference){

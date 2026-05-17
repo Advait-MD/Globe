@@ -14,7 +14,7 @@ export default function Signup({setPage}){
   try{
 
     const response = await fetch(
-      "http://127.0.0.1:8000/signup",
+      "https://globe-2-i1ty.onrender.com/signup",
       {
         method: "POST",
 

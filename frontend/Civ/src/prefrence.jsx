@@ -13,7 +13,7 @@ export default function Preference({setPage}){
  try{
     setLoading(true);
     const response = await fetch(
-      "http://127.0.0.1:8000/save-preference",
+      "https://globe-2-i1ty.onrender.com/save-preference",
       {
         method: "POST",
 

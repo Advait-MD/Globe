@@ -13,7 +13,7 @@ export default function Profile({ refreshNews }){
         try{
 
             const response = await fetch(
-                `http://127.0.0.1:8000/get-preference/${username}`
+                `https://globe-2-i1ty.onrender.com/get-preference/${username}`
             );
 
             const data = await response.json();
@@ -37,7 +37,7 @@ export default function Profile({ refreshNews }){
 
      async function updatePreference(){
         try{
-            const response = await fetch("http://127.0.0.1:8000/save-preference",
+            const response = await fetch("https://globe-2-i1ty.onrender.com/save-preference",
                 {method: "POST",
                     headers:{"Content-Type":"application/json"},
                     body: JSON.stringify({username, preference})
@@ -79,7 +79,7 @@ export default function Profile({ refreshNews }){
 }
     async function deleteAccount(){
         try{
-            const response = await fetch(`http://127.0.0.1:8000/delete-account/${username}`,
+            const response = await fetch(`https://globe-2-i1ty.onrender.com/delete-account/${username}`,
             {method: "DELETE"});
             
             const data = await response.json();
