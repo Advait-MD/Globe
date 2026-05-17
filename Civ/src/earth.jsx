@@ -18,6 +18,8 @@ export default function World(){
      }, [showPopup]);
 
     useEffect(() => {
+
+     //Camera, scene, materal, mesh and stuff......   
         const scene = new THREE.Scene();
         const camera =new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,5000);
         camera.position.z = 3;
@@ -36,21 +38,15 @@ export default function World(){
         const earth =new THREE.Mesh(earthGeometry, earthMaterial);
 
         scene.add(earth);
-
-    
-
+//Lighting
         const light = new THREE.DirectionalLight(0xffffff,2);
         light.position.set(5,3,5);
         scene.add(light);
-
         const glow = new THREE.AmbientLight( 0x404040 );
         scene.add(glow);
-
-
+// Orbit Controls
         orbitControl.init();
-
-        
-
+// Stars in the sky        
         function createStarLayer(count,size,spread){
 
             const geo = new THREE.BufferGeometry();
@@ -68,13 +64,12 @@ export default function World(){
         }
 
         const starsFar=createStarLayer(4000,0.5,3000);
-
         const starsMid=createStarLayer(2000,1.2,1500);
 
         scene.add(starsFar);
         scene.add(starsMid);
 
-       
+//raycaster and some formulas of conversion       
         const raycaster=new THREE.Raycaster();
         const mouse=new THREE.Vector2();
 
@@ -98,17 +93,10 @@ export default function World(){
             return new THREE.Vector3(x,y,z);
         }
 
-        // =========================
-        // FETCH NEWS
-        // =========================
-
-        
+       
         fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
 
-        // =========================
-        // MARKER CLICK
-        // =========================
-
+//handels the touch on scene  
         function handlePointerDown(event){
 
             if(popupRef.current) return;
@@ -132,11 +120,7 @@ export default function World(){
         }
 
         window.addEventListener("pointerdown", handlePointerDown);
-
-        // =========================
-        // ANIMATION
-        // =========================
-
+       
         function animate(){
             requestAnimationFrame(animate);
             if(!popupRef.current){
@@ -149,21 +133,15 @@ export default function World(){
 
         animate();
 
-        // =========================
-        // MOUNT
-        // =========================
-
+        
         if(mountRef.current){
             mountRef.current.appendChild(renderer.domElement);
         }
 
-        // allow profile refresh
+        // makes earth refresh without throwing me to login page when news is updated
         window.refreshNews = () => fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
 
-        // =========================
-        // CLEANUP
-        // =========================
-
+        
         return () => {
 
             window.removeEventListener("pointerdown",handlePointerDown);
