@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-export default function Profile(){
+export default function Profile({ refreshNews }){
     const [showProfile, setShowProfile] = useState(false);
     const [preference, setPreference] = useState("");
     const username = localStorage.getItem("username");
@@ -48,8 +48,13 @@ export default function Profile(){
             if(response.ok){
                 toast.dismiss();
                 toast.success("Preference updated");
-                setShowProfile(false);
-                window.location.reload();
+                if(window.refreshNews){
+
+                  await window.refreshNews();
+              }
+
+                 setShowProfile(false);
+                
             } else {
                 toast.dismiss();
                 toast.error(data.detail);

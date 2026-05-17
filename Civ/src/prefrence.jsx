@@ -1,5 +1,5 @@
 import Openpage from "./globe.jsx";
-import {World} from "./globe.jsx";
+import World from "./earth.jsx";
 import toast from "react-hot-toast";
 import {useState} from "react";
 

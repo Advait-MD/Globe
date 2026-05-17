@@ -1,7 +1,7 @@
 import Openpage from "./globe.jsx";
 import Signup from "./signup.jsx";
 import toast from "react-hot-toast";
-import {World} from "./globe.jsx";
+import World from "./earth.jsx";
 import { useState } from "react";
 import Preference from "./prefrence.jsx";
 
