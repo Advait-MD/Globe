@@ -1,15 +1,12 @@
 import Openpage from "./globe";
 import Preference from "./prefrence";
-import {Toaster} from "react-hot-toast";
 import toast from "react-hot-toast";
 import {useState} from "react";
 
-export default function Signup({setIsSignup, setIsLoggedIn}){
+export default function Signup({setPage}){
 
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
-
-    const [showPreference, setShowPreference] = useState(false);
 
     //sigup function
     async function handleSignup(){
@@ -37,29 +34,29 @@ export default function Signup({setIsSignup, setIsLoggedIn}){
     console.log(data);
 
     if(response.ok){
+      toast.dismiss();
       toast.success("Signup successful");
-      setShowPreference(true);
+      localStorage.setItem("username", username);
+      setTimeout(() => {
+        setPage("Preference");
+      },1200);
+      
     }
     else{
+      toast.dismiss();
       toast.error(data.detail);
     }
 
   } catch(error){
 
     console.log(error);
-
+    toast.dismiss();
     toast.error("Server error");
   }
 }
-
-if(showPreference){
-  localStorage.setItem("username", username);
-  return<Preference setIsLoggedIn={setIsLoggedIn} />;
-}
 // signup rendering
     return(
-        <div className="relative h-screen w-screen">
-         <Toaster />   
+        <div className="relative h-screen w-screen"> 
             <Openpage />
         <div className=" absolute inset-0 flex justify-center items-center z-10">
         <div className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-6">

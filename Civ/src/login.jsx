@@ -1,15 +1,14 @@
 import Openpage from "./globe.jsx";
 import Signup from "./signup.jsx";
-import {Toaster} from "react-hot-toast";
 import toast from "react-hot-toast";
 import {World} from "./globe.jsx";
 import { useState } from "react";
+import Preference from "./prefrence.jsx";
 
 //Login Component
 
 export default function Login(){
- const [isSignup, setIsSignup] = useState(false);
- const [isLoggedIn, setIsLoggedIn] = useState(false);
+ const [page, setPage] = useState("login");
 
  // username and password
  const[username, setUsername] = useState("");
@@ -41,26 +40,33 @@ export default function Login(){
     console.log(data);
 
     if(response.ok){
+      toast.dismiss();
+      toast.dismiss
       toast.success("Login successful");
       localStorage.setItem("username", username);
-      setIsLoggedIn(true);
+      if(data.hasPreferece){
+        setTimeout(() => {setPage("World");}, 20);
+      }
+      else{
+        setPage("Preference");
+      }
     }
     else{
+      toast.dismiss();
       toast.error(data.detail);
     }
 
   } catch(error){
 
     console.log(error);
-
+    toast.dismiss();
     toast.error("Server error");
   }
 }
     //login rendering
   return(
     <div className="relative h-screen w-screen">
-      <Toaster />
-    {!isSignup && !isLoggedIn && (
+      {page === "login" && (
       <>
     <Openpage />
     
@@ -89,19 +95,16 @@ export default function Login(){
 
       <button
         className="text-white underline hover:text-blue-400 transition"
-        onClick={() => { toast.dismiss(); setIsSignup(true); }} >
+        onClick={() => { toast.dismiss(); setPage("Signup"); }} >
          Don't have an account? Sign Up
       </button>
     </div>
     </div>
     </>
     )}
-    {isSignup && !isLoggedIn && (<Signup setIsSignup={setIsSignup} setIsLoggedIn={setIsLoggedIn} />)}
-    {isLoggedIn && (<World />)}
+    {page === "Signup" && (<Signup setPage={setPage} />)}
+    {page === "World" && (<World />)}
+    {page === "Preference" && (<Preference setPage={setPage}/>)}
     </div>
   );
 }
-
-
-
- 

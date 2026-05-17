@@ -288,7 +288,8 @@ def login(
         )
 
     return {
-        "message": "Login successful"
+        "message": "Login successful",
+        "hasPreference": bool(db_user.preference)
     }
 
 @app.post("/save-preference")

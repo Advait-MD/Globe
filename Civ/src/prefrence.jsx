@@ -1,9 +1,9 @@
 import Openpage from "./globe.jsx";
-import {Toaster} from "react-hot-toast";
+import {World} from "./globe.jsx";
 import toast from "react-hot-toast";
 import {useState} from "react";
 
-export default function Preference({setIsLoggedIn}){
+export default function Preference({setPage}){
     const category =["world","sport","technology"];
     const [preference, setPreference] = useState("");
     const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ export default function Preference({setIsLoggedIn}){
     const data = await response.json();
 
     if(response.ok){
-
+      toast.dismiss();
       toast.success("Preference saved");
 
       localStorage.setItem(
@@ -39,25 +39,24 @@ export default function Preference({setIsLoggedIn}){
         username
       );
       setTimeout(() => {
-        console.log("Setting logged in");
-        setIsLoggedIn(true);
+        setPage("World");
       }, 20);
     }
 
     else{
+      toast.dismiss();
       toast.error(data.detail);
     }
 
   } catch(error){
 
     console.log(error);
-
+    toast.dismiss();
     toast.error("Server error");
   }
     }
     return(
         <div className="relative h-screen w-screen">
-            <Toaster />
             <Openpage />
             <div className=" absolute inset-0 flex justify-center items-center z-10">
             <div className=" bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-6">
