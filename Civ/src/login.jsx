@@ -44,7 +44,7 @@ export default function Login(){
       toast.dismiss
       toast.success("Login successful");
       localStorage.setItem("username", username);
-      if(data.hasPreferece){
+      if(data.hasPreference){
         setTimeout(() => {setPage("World");}, 20);
       }
       else{
