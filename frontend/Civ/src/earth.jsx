@@ -13,9 +13,7 @@ export default function World(){
 
     const username = localStorage.getItem("username");
 
-    useEffect(() => { 
-        popupRef.current = showPopup;
-     }, [showPopup]);
+    useEffect(() => { popupRef.current = showPopup;}, [showPopup]);
 
     useEffect(() => {
 
@@ -38,6 +36,16 @@ export default function World(){
         const earth =new THREE.Mesh(earthGeometry, earthMaterial);
 
         scene.add(earth);
+
+        function handleResize(){
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener("resize", handleResize);
+
 //Lighting
         const light = new THREE.DirectionalLight(0xffffff,2);
         light.position.set(5,3,5);
@@ -143,7 +151,8 @@ export default function World(){
 
         
         return () => {
-
+            
+            window.removeEventListener("resize", handleResize);
             window.removeEventListener("pointerdown",handlePointerDown);
             renderer.dispose();
 
