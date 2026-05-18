@@ -25,6 +25,10 @@ This project allows users to explore news through an immersive globe experience 
 ### Swagger Docs  
 🔗 [Add Swagger Docs URL Here]
 
+Test credentials:
+test username: UserOne
+test password: 1234
+
 </div>
 
 ---
@@ -61,7 +65,7 @@ This project allows users to explore news through an immersive globe experience 
 <br/>
 <br/>
 
-### Prifile Setting
+### Profile Setting
 
 (Add Screenshot Here)
 
