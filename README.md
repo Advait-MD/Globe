@@ -26,7 +26,7 @@ https://globe-2-i1ty.onrender.com
 https://globe-2-i1ty.onrender.com/docs
 
 Test credentials:
-Test username: UserOne ,
+Test username: test1 ,
 Test password: 1234
 
 </div>
