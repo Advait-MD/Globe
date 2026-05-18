@@ -67,7 +67,7 @@ async def get_coordinates(location):
     return None
 
 #endpoint to get user specific news from the api
-@app.get("/news/{username}", tages=["news"])
+@app.get("/news/{username}", tags=["news"])
 async def get_latest_news_with_locations(username: str, db: Session = Depends(get_db)):
 
     user = db.query(User).filter(
