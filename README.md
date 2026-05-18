@@ -17,21 +17,17 @@ This project allows users to explore news through an immersive globe experience 
 <div align="center">
 
 ### Frontend  
-🔗 [Add Frontend URL Here]
+https://globe-mocha-eta.vercel.app/
 
 ### Backend API  
-🔗 [Add Backend API URL Here]
+https://globe-2-i1ty.onrender.com
 
 ### Swagger Docs  
-🔗 [Add Swagger Docs URL Here]
+https://globe-2-i1ty.onrender.com/docs
 
 Test credentials:
-<<<<<<< Updated upstream
-test username: UserOne
-=======
-test username: Userone
->>>>>>> Stashed changes
-test password: 1234
+Test username: UserOne
+Test password: 1234
 
 </div>
 
