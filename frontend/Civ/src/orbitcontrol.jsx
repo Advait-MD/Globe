@@ -1,5 +1,10 @@
+//this code is for controlling the camera around the globe by mouse functions "dont work on mobiles for now"
+
 export default function OrbitControl(camera, popupRef){
-    return {enabled: true,autoRotate: true, rotateSpeed: 1, zoomSpeed: 1.2, minDistance: 2, maxDistance: 100, minPolarAngle: 0, maxPolarAngle: Math.PI, distance: 3, theta: 0, phi: Math.PI / 2, targetTheta: 0, targetPhi: Math.PI / 2, targetDistance: 3,isDragging: false,
+    
+    return {
+        //orbit constrol states and parameters
+        enabled: true,autoRotate: true, rotateSpeed: 1, zoomSpeed: 1.2, minDistance: 2, maxDistance: 100, minPolarAngle: 0, maxPolarAngle: Math.PI, distance: 3, theta: 0, phi: Math.PI / 2, targetTheta: 0, targetPhi: Math.PI / 2, targetDistance: 3,isDragging: false,
            previousMousePosition: {x: 0,y: 0},
              init(){
                 window.addEventListener("mousedown",(e) => this.onMouseDown(e));
@@ -7,7 +12,7 @@ export default function OrbitControl(camera, popupRef){
                 window.addEventListener("mouseup",() => this.onMouseUp());
                 window.addEventListener("wheel",(e) => this.onMouseWheel(e), { passive: false });
             },
-
+        //mouse movement and interaction functions   
             onMouseDown(e){
                 this.isDragging = true;
                 this.previousMousePosition = {x: e.clientX, y: e.clientY };

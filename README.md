@@ -26,7 +26,11 @@ This project allows users to explore news through an immersive globe experience 
 🔗 [Add Swagger Docs URL Here]
 
 Test credentials:
+<<<<<<< Updated upstream
 test username: UserOne
+=======
+test username: Userone
+>>>>>>> Stashed changes
 test password: 1234
 
 </div>

@@ -9,47 +9,34 @@ export default function Preference({setPage}){
     const [loading, setLoading] = useState(false);
     const username = localStorage.getItem("username");
     
+   //save user prefrences to the backend, user specific
     async function savePrefrences(){
- try{
-    setLoading(true);
-    const response = await fetch(
-      "https://globe-2-i1ty.onrender.com/save-preference",
-      {
-        method: "POST",
-
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body: JSON.stringify({
-          username,
-          preference: preference
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if(response.ok){
-      toast.dismiss();
-      toast.success("Preference saved");
-
-      localStorage.setItem(
-        "username",
-        username
-      );
-      setTimeout(() => {
-        setPage("World");
-      }, 20);
+     try{
+     setLoading(true);
+     const response = await fetch("https://globe-2-i1ty.onrender.com/save-preference",
+    {
+      method: "POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        username,
+        preference: preference
+      })
     }
+  );
 
-    else{
-      toast.dismiss();
-      toast.error(data.detail);
-    }
+  const data = await response.json();
 
+  if(response.ok){
+    toast.dismiss();
+    toast.success("Preference saved");
+    localStorage.setItem("username", username);
+    setTimeout(() => {setPage("World");}, 20);
+  }
+  else{
+    toast.dismiss();
+    toast.error(data.detail);
+   }
   } catch(error){
-
     console.log(error);
     toast.dismiss();
     toast.error("Server error");

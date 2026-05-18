@@ -21,22 +21,26 @@ export default function World(){
         const scene = new THREE.Scene();
         const camera =new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,5000);
         camera.position.z = 3;
+        
         const orbitControl = OrbitControl(camera, popupRef);
+        
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize( window.innerWidth, window.innerHeight );
-
+         
+        //texture and geometry for earth and markers
         const textureLoader = new THREE.TextureLoader();
         const earthGeometry=new THREE.SphereGeometry(1,62,62);
         const markerGeometry =new THREE.SphereGeometry(0.04,16,16);
-
+        
+        //earth and marker material
         const earthMaterial =new THREE.MeshStandardMaterial({map: textureLoader.load("/graphics/earthpix2.png") });
-
         const markerMaterial =new THREE.MeshStandardMaterial({color: 0xff0000 });
 
         const earth =new THREE.Mesh(earthGeometry, earthMaterial);
 
         scene.add(earth);
-
+        
+        //handeling window resizes
         function handleResize(){
 
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -46,15 +50,18 @@ export default function World(){
 
         window.addEventListener("resize", handleResize);
 
-//Lighting
+
+        //Lighting
         const light = new THREE.DirectionalLight(0xffffff,2);
         light.position.set(5,3,5);
         scene.add(light);
         const glow = new THREE.AmbientLight( 0x404040 );
         scene.add(glow);
-// Orbit Controls
+
+        // Orbit Controls
         orbitControl.init();
-// Stars in the sky        
+
+        // Stars in the sky for the earth specific        
         function createStarLayer(count,size,spread){
 
             const geo = new THREE.BufferGeometry();
@@ -77,20 +84,21 @@ export default function World(){
         scene.add(starsFar);
         scene.add(starsMid);
 
-//raycaster and some formulas of conversion       
+        //raycaster and some formulas of conversion       
         const raycaster=new THREE.Raycaster();
         const mouse=new THREE.Vector2();
 
         const markers = [];
 
-        
+        //degree to radian conversion function
         function degToRad(lat, lon){
             return {
                 lat:lat * Math.PI / 180,
                 lon:lon * Math.PI / 180
             };
         }
-
+        
+        //lat and long to xyz conversion function
         function latLonToXYZ(lat,lon,radius){
 
             const lonOffset = -0.0598;
@@ -101,10 +109,10 @@ export default function World(){
             return new THREE.Vector3(x,y,z);
         }
 
-       
+        //fetch news called
         fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
 
-//handels the touch on scene  
+        //handels the touch on scene using raycaster  
         function handlePointerDown(event){
 
             if(popupRef.current) return;

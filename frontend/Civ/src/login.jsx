@@ -1,3 +1,5 @@
+// handle login and prefrences
+
 import Stars from "./sky.jsx";
 import Signup from "./signup.jsx";
 import toast from "react-hot-toast";
