@@ -73,7 +73,19 @@ Test password: 1234
 
 <img width="1918" height="968" alt="Screenshot 2026-05-18 081951" src="https://github.com/user-attachments/assets/a7009957-cc4b-4725-9bee-474eb727654f" />
 
+---
 
+## Lernings
+<p align="left">
+ Working with SQLite and SQLAlchemy.
+ </br>
+ Well modulated code writing approach.
+ </br>
+ Working with camera, scenes and rendering.
+ </br>
+ Efficient use of React states.
+</p>
+ 
 </div>
 
 ---
