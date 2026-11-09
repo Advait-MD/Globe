@@ -1,47 +1,98 @@
-from operator import add
 import os
 import asyncio
+import logging
+from contextlib import asynccontextmanager
+from functools import lru_cache
+
 import httpx
-import spacy
-import bcrypt
 from dotenv import load_dotenv
-from fastapi import (FastAPI,HTTPException,Depends)
+from fastapi import FastAPI, HTTPException, Depends, status
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 from fastapi.middleware.cors import CORSMiddleware
-from database import(SessionLocal,engine,Base)
+
+from database import SessionLocal, engine, Base
 from models import User
-from schemas import UserCreate, PreferenceData
+from schemas import UserCreate, UserLogin, PreferenceData
+from auth import (
+    create_access_token,
+    get_current_user,
+    get_db,
+    hash_password,
+    verify_password,
+)
 
 load_dotenv()
+logger = logging.getLogger(__name__)
 
 GUARDIAN_API_KEY = os.getenv("API_KEY")
 ENDPOINT_URL = "https://content.guardianapis.com/search"
 
-app = FastAPI(title="Globe News API",description="Interactive globe based news viewing application",version="1.0.0")
 
-#database setup
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Load the spaCy model at boot rather than on the first /news request.
+    try:
+        get_nlp()
+    except Exception:
+        logger.exception("Could not load spaCy model; /news will fail until it is installed")
+    yield
+
+
+app = FastAPI(title="Globe News API", description="Interactive globe based news viewing application", version="1.1.0", lifespan=lifespan)
+
+# database setup
 Base.metadata.create_all(bind=engine)
 
-app.add_middleware(CORSMiddleware,allow_origins=["https://globe-mocha-eta.vercel.app"],allow_credentials=True,allow_methods=["*"],allow_headers=["*"],)
+# Comma-separated list, e.g. "https://globe-mocha-eta.vercel.app,http://localhost:5173"
+CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "https://globe-mocha-eta.vercel.app").split(",") if o.strip()]
 
-def get_db():
+# Auth travels in the Authorization header, not cookies, so credentials mode is off.
+app.add_middleware(CORSMiddleware, allow_origins=CORS_ORIGINS, allow_credentials=False, allow_methods=["*"], allow_headers=["*"])
+
+
+def seed_demo_user():
+    """Create the public demo account from env vars, if configured.
+
+    users.db is no longer shipped in the repo, so a fresh deploy starts with an
+    empty database; this keeps the README's test credentials working.
+    """
+    username = os.getenv("DEMO_USERNAME")
+    password = os.getenv("DEMO_PASSWORD")
+    if not (username and password):
+        return
     db = SessionLocal()
     try:
-        yield db
+        if db.query(User).filter(User.username == username).first() is None:
+            db.add(User(username=username, password=hash_password(password), preference=os.getenv("DEMO_PREFERENCE", "technology")))
+            db.commit()
+    except IntegrityError:  # another worker seeded it first
+        db.rollback()
     finally:
         db.close()
 
-#nlp and geolocator to extract location name and coordinates from the news headline and trail text
-nlp = spacy.load("en_core_web_sm")
-geolocator = Nominatim(user_agent="fastapi-news-app")
-geocode = RateLimiter(geolocator.geocode,min_delay_seconds=1)
 
-#function to extract location names
+seed_demo_user()
+
+
+# nlp and geolocator to extract location name and coordinates from the news headline and trail text
+@lru_cache(maxsize=1)
+def get_nlp():
+    import spacy  # imported lazily so the auth/database code can be tested without the model
+    return spacy.load("en_core_web_sm")
+
+
+geolocator = Nominatim(user_agent="fastapi-news-app")
+geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
+
+
+# function to extract location names
 def extract_locations(text):
 
-    doc = nlp(text)
+    doc = get_nlp()(text)
 
     return [
         ent.text
@@ -49,12 +100,12 @@ def extract_locations(text):
         if ent.label_ in ["GPE", "LOC"]
     ]
 
-#function to get lat and long values of locations
+
+# function to get lat and long values of locations
 async def get_coordinates(location):
 
-    loop = asyncio.get_event_loop()
     try:
-        loc = await loop.run_in_executor(None,geocode,location)
+        loc = await asyncio.to_thread(geocode, location)
         if loc:
             return {"name": location,
                 "lat": loc.latitude,
@@ -66,67 +117,43 @@ async def get_coordinates(location):
 
     return None
 
-#endpoint to get user specific news from the api
-@app.get("/news/{username}", tags=["news"])
-async def get_latest_news_with_locations(username: str, db: Session = Depends(get_db)):
 
-    user = db.query(User).filter(
-        User.username == username
-    ).first()
+async def fetch_guardian_results(section: str) -> list:
+    params = {"api-key": GUARDIAN_API_KEY, "page-size": 10, "order-by": "newest", "show-fields": "trailText,headline", "section": section}
 
-    if not user:
-
-        raise HTTPException(
-            status_code=404,
-            detail="User not found"
-        )
-
-    # Get user preference
-    preference = user.preference
-
-    # Guardian API params
-    params = {"api-key": GUARDIAN_API_KEY,"page-size": 10,"order-by": "newest","show-fields": "trailText,headline","section": preference}
-
-    async with httpx.AsyncClient(
-        timeout=10.0
-    ) as client:
-
+    async with httpx.AsyncClient(timeout=10.0) as client:
         try:
-            response = await client.get(
-                ENDPOINT_URL,
-                params=params
-            )
-
+            response = await client.get(ENDPOINT_URL, params=params)
         except httpx.RequestError:
-            raise HTTPException(
-                status_code=500,
-                detail="Failed to connect to Guardian API"
-            )
+            raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="Failed to connect to Guardian API")
 
     if response.status_code != 200:
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="Guardian API error")
 
-        raise HTTPException(
-            status_code=500,
-            detail="Guardian API error"
-        )
+    return response.json().get("response", {}).get("results", [])
 
-    data = response.json()
+
+# endpoint to get the signed-in user's news, located on the globe
+@app.get("/news", tags=["news"])
+async def get_latest_news_with_locations(user: User = Depends(get_current_user)):
+
+    if not user.preference:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No news preference set")
+
+    results = await fetch_guardian_results(user.preference)
 
     extracted = []
 
     cache = {}
-    
-    #response parsing
-    for item in data.get(
-        "response",
-        {}
-    ).get("results", []):
 
-        text = " ".join([item.get("webTitle", ""),item.get("fields", {}).get("headline",""),item.get("fields", {}).get("trailText","")])
+    # response parsing
+    for item in results:
+
+        text = " ".join([item.get("webTitle", ""), item.get("fields", {}).get("headline", ""), item.get("fields", {}).get("trailText", "")])
         locations = list(set(extract_locations(text)))
         coords_list = []
-     
-     #getting coordinates of the locations
+
+        # getting coordinates of the locations
         for loc in locations:
 
             if loc in cache:
@@ -137,99 +164,73 @@ async def get_latest_news_with_locations(username: str, db: Session = Depends(ge
             if coord:
                 coords_list.append(coord)
 
-        extracted.append({"id": item.get("id"),"Headline": item.get("fields",{}).get("headline"),"WebURL": item.get("webUrl"),"Locations": coords_list})
+        extracted.append({"id": item.get("id"), "Headline": item.get("fields", {}).get("headline"), "WebURL": item.get("webUrl"), "Locations": coords_list})
 
     return extracted
 
-#user signup with unique username and hashed password
-@app.post("/signup",tags=["auth"])
-def signup(user: UserCreate,db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(
-        User.username == user.username
-    ).first()
 
-    if existing_user:
-        raise HTTPException(status_code=400,detail="User already exists")
-    
-    #password hashing
-    hashed_password = bcrypt.hashpw( user.password.encode("utf-8"),bcrypt.gensalt())
-    
-    #commiting new user in db
-    new_user = User(username=user.username,password=hashed_password.decode("utf-8"))
+# user signup with unique username and hashed password; returns a token so the
+# user can pick a preference straight away
+@app.post("/signup", tags=["auth"], status_code=status.HTTP_201_CREATED)
+def signup(user: UserCreate, db: Session = Depends(get_db)):
+    if db.query(User).filter(User.username == user.username).first():
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="User already exists")
+
+    new_user = User(username=user.username, password=hash_password(user.password))
     db.add(new_user)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:  # lost a race with a simultaneous signup for the same name
+        db.rollback()
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail="User already exists")
 
     return {
-        "message": "User created successfully"
+        "message": "User created successfully",
+        "access_token": create_access_token(new_user.username),
+        "token_type": "bearer",
     }
 
-#user login using unique username and password
+
+# user login; one generic error for unknown user and wrong password so the
+# response doesn't reveal which usernames exist
 @app.post("/login", tags=["auth"])
-def login(user: UserCreate,db: Session = Depends(get_db)):
+def login(user: UserLogin, db: Session = Depends(get_db)):
 
-    db_user = db.query(User).filter(
-        User.username == user.username
-    ).first()
-    
-    #user check and password verification
-    if not db_user:
-        raise HTTPException(status_code=400,detail="User not found")
+    db_user = db.query(User).filter(User.username == user.username).first()
 
-    valid_password = bcrypt.checkpw(user.password.encode("utf-8"),db_user.password.encode("utf-8"))
-
-    if not valid_password:
-
-        raise HTTPException(status_code=400,detail="Wrong password")
+    if not verify_password(user.password, db_user.password if db_user else None):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid username or password",
+        )
 
     return {
         "message": "Login successful",
-        "hasPreference": bool(db_user.preference)
+        "access_token": create_access_token(db_user.username),
+        "token_type": "bearer",
+        "username": db_user.username,
+        "hasPreference": bool(db_user.preference),
     }
 
-#endpoint to save user preference for news in db
-@app.post("/save-preference")
-def save_preference(data: PreferenceData,db: Session = Depends(get_db)):
-    # Find user
-    user = db.query(User).filter(
-     User.username == data.username
-    ).first()
 
-    # If user not found
-    if not user:
-        raise HTTPException(status_code=404,detail="User not found")
+# get the signed-in user's news preference
+@app.get("/preference", tags=["profile"])
+def get_preference(user: User = Depends(get_current_user)):
+    return {"preference": user.preference}
 
-    # Save preference
+
+# save the signed-in user's news preference
+@app.post("/preference", tags=["profile"])
+def save_preference(data: PreferenceData, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    # FastAPI caches get_db per request, so `user` already belongs to `db`
     user.preference = data.preference
-
     db.commit()
+    return {"message": "Preference saved successfully"}
 
-    return {
-        "message": "Preference saved successfully"
-    }
 
-#terminate user account by deleting user data from db
-@app.delete("/delete-account/{username}")
-
-def delete_account(username:str,db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.username == username).first()
-    if not user:
-        raise HTTPException(status_code=404,detail="User not found")
-    db.delete(user) 
+# terminate the signed-in user's account
+@app.delete("/account", tags=["profile"])
+def delete_account(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    db.delete(user)
     db.commit()
-    return{"message": "Account terminated"}
-
-#end point to get user news preference that he selected during signup or save prefrence actions
-@app.get("/get-preference/{username}")
-
-def get_preference(
-    username:str,
-    db: Session = Depends(get_db)
-):
-    user = db.query(User).filter(User.username == username).first()
-    if not user:
-        raise HTTPException(
-            status_code=404,
-            detail="User not found"
-        )
-    return{"preference": user.preference}
-
+    return {"message": "Account terminated"}

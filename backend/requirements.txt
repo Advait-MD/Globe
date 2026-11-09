@@ -2,7 +2,8 @@ fastapi
 uvicorn
 sqlalchemy
 bcrypt
-passlib
+pyjwt
+psycopg[binary]
 python-dotenv
 httpx
 spacy
