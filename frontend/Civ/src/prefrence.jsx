@@ -2,25 +2,21 @@ import Stars from "./sky.jsx";
 //import World from "./earth.jsx";
 import toast from "react-hot-toast";
 import {useState} from "react";
+import { authFetch, errorMessage } from "./api.js";
 
 export default function Preference({setPage}){
     const category =["environment","sport","technology"];
     const [preference, setPreference] = useState("");
     const [loading, setLoading] = useState(false);
-    const username = localStorage.getItem("username");
     
    //save user prefrences to the backend, user specific
     async function savePrefrences(){
      try{
      setLoading(true);
-     const response = await fetch("https://globe-2-i1ty.onrender.com/save-preference",
+     const response = await authFetch("/preference",
     {
       method: "POST",
-      headers:{"Content-Type":"application/json"},
-      body: JSON.stringify({
-        username,
-        preference: preference
-      })
+      body: JSON.stringify({ preference })
     }
   );
 
@@ -29,17 +25,18 @@ export default function Preference({setPage}){
   if(response.ok){
     toast.dismiss();
     toast.success("Preference saved");
-    localStorage.setItem("username", username);
     setTimeout(() => {setPage("World");}, 20);
   }
   else{
     toast.dismiss();
-    toast.error(data.detail);
+    toast.error(errorMessage(data));
    }
   } catch(error){
     console.log(error);
     toast.dismiss();
     toast.error("Server error");
+  } finally {
+    setLoading(false);
   }
     }
     return(

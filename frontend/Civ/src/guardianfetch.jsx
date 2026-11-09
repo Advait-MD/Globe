@@ -1,7 +1,8 @@
 import * as THREE from 'three';
+import { authFetch } from './api.js';
 
 //fetch news data location coords from the backend and create markers 
-export default async function fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ})
+export default async function fetchNews({earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ})
 
 {   //markers defination to show news location on the globe
     markers.forEach(marker => {
@@ -11,7 +12,8 @@ export default async function fetchNews({username, earth, markers, markerGeometr
                 markers.length = 0;
     
                 try{
-                    const response =await fetch(`https://globe-2-i1ty.onrender.com/news/${username}`);
+                    const response =await authFetch("/news");
+                    if(!response.ok) return;
                     const data =await response.json();
                     const safeData = Array.isArray(data)?data:[data];
                     

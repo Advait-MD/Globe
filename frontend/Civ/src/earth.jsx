@@ -11,8 +11,6 @@ export default function World(){
     const [selectedNews, setSelectedNews] = useState(null);
     const [showPopup, setShowPopup]= useState(false);
 
-    const username = localStorage.getItem("username");
-
     useEffect(() => { popupRef.current = showPopup;}, [showPopup]);
 
     useEffect(() => {
@@ -110,7 +108,7 @@ export default function World(){
         }
 
         //fetch news called
-        fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
+        fetchNews({earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
 
         //handels the touch on scene using raycaster  
         function handlePointerDown(event){
@@ -155,7 +153,7 @@ export default function World(){
         }
 
         // makes earth refresh without throwing me to login page when news is updated
-        window.refreshNews = () => fetchNews({username, earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
+        window.refreshNews = () => fetchNews({earth, markers, markerGeometry, markerMaterial, degToRad, latLonToXYZ});
 
         
         return () => {

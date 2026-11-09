@@ -1,18 +1,19 @@
 //handles profile prefrence
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { authFetch, clearSession, errorMessage, getUsername } from "./api.js";
 
 export default function Profile({ refreshNews }){
     const [showProfile, setShowProfile] = useState(false);
     const [preference, setPreference] = useState("");
-    const username = localStorage.getItem("username");
+    const username = getUsername();
     
    useEffect(() => {
    
       //fetch user prefrences that they have already selected during sign up or login
    async function fetchPreference(){
       try{
-      const response = await fetch(`https://globe-2-i1ty.onrender.com/get-preference/${username}`);
+      const response = await authFetch("/preference");
       const data = await response.json();
       if(response.ok){
          setPreference(data.preference);
@@ -27,10 +28,9 @@ export default function Profile({ refreshNews }){
 
 //update prefrences mid session 
 async function updatePreference(){
-   try{const response = await fetch("https://globe-2-i1ty.onrender.com/save-preference",
+   try{const response = await authFetch("/preference",
       {method: "POST",
-         headers:{"Content-Type":"application/json"},
-         body: JSON.stringify({username, preference})}
+         body: JSON.stringify({preference})}
    );
 
    const data = await response.json();
@@ -43,7 +43,7 @@ async function updatePreference(){
     setShowProfile(false);
     } else {
       toast.dismiss();
-      toast.error(data.detail);
+      toast.error(errorMessage(data));
       }
       } catch (error) {
          console.log(error);
@@ -54,7 +54,7 @@ async function updatePreference(){
 
 //logout handel
 function logout(){
-   localStorage.removeItem("username");
+   clearSession();
    window.location.reload();
 }
 
@@ -67,17 +67,16 @@ function closeProfile(){
 //terminate account of user
 async function deleteAccount(){
    try{
-      const response = await fetch(`https://globe-2-i1ty.onrender.com/delete-account/${username}`,
-         {method: "DELETE"});
+      const response = await authFetch("/account", {method: "DELETE"});
          const data = await response.json();
          if(response.ok){
             toast.dismiss();
             toast.success("Account deleted");
-            localStorage.removeItem("username");
+            clearSession();
             window.location.reload();
             } else{
                 toast.dismiss();
-                toast.error(data.detail);
+                toast.error(errorMessage(data));
             }
             
         } catch (error) {

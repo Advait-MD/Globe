@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import World from "./earth.jsx";
 import { useState } from "react";
 import Preference from "./prefrence.jsx";
+import { API_URL, errorMessage, saveSession } from "./api.js";
 
 //Login Component
 
@@ -22,7 +23,7 @@ export default function Login(){
   try{
 
     const response = await fetch(
-      "https://globe-2-i1ty.onrender.com/login",
+      `${API_URL}/login`,
       {
         method: "POST",
 
@@ -39,13 +40,11 @@ export default function Login(){
 
     const data = await response.json();
 
-    console.log(data);
-
     if(response.ok){
       toast.dismiss();
       toast.dismiss();
       toast.success("Login successful");
-      localStorage.setItem("username", username);
+      saveSession(data.access_token, data.username);
       if(data.hasPreference){
         setTimeout(() => {setPage("World");}, 20);
       }
@@ -55,7 +54,7 @@ export default function Login(){
     }
     else{
       toast.dismiss();
-      toast.error(data.detail);
+      toast.error(errorMessage(data, "Login failed"));
     }
 
   } catch(error){

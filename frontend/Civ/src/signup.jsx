@@ -3,6 +3,7 @@ import Stars from "./sky.jsx";
 //import Preference from "./prefrence";
 import toast from "react-hot-toast";
 import {useState} from "react";
+import { API_URL, errorMessage, saveSession } from "./api.js";
 
 export default function Signup({setPage}){
 
@@ -12,7 +13,7 @@ export default function Signup({setPage}){
   //sigup function
   async function handleSignup(){
    try{
-    const response = await fetch("https://globe-2-i1ty.onrender.com/signup",
+    const response = await fetch(`${API_URL}/signup`,
       {
         method: "POST",
         headers:{"Content-Type":"application/json"},
@@ -22,14 +23,12 @@ export default function Signup({setPage}){
 
     const data = await response.json();
 
-    console.log(data);
-
     //ok response
 
     if(response.ok){
       toast.dismiss();
       toast.success("Signup successful");
-      localStorage.setItem("username", username);
+      saveSession(data.access_token, username);
       setTimeout(() => {
         setPage("Preference");
       },1200);
@@ -38,7 +37,7 @@ export default function Signup({setPage}){
     //problem in response
     else{
       toast.dismiss();
-      toast.error(data.detail);
+      toast.error(errorMessage(data, "Signup failed"));
     }
 
   } catch(error){
