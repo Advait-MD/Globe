@@ -7,6 +7,15 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust  # throwaway CI database, no credentials needed
+          POSTGRES_DB: globe_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
     defaults:
       run:
         working-directory: backend
@@ -18,9 +27,14 @@ jobs:
           cache: pip
           cache-dependency-path: backend/requirements*.txt
       - run: pip install -r requirements-dev.txt
-      - run: python -m pytest -v
+      - name: pytest (SQLite)
+        run: python -m pytest -v
+      - name: pytest (PostgreSQL)
+        run: python -m pytest -v
+        env:
+          TEST_DATABASE_URL: postgresql://postgres@localhost:5432/globe_test
 
-  frontend-build:
+  frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,4 +50,6 @@ jobs:
           cache: pnpm
           cache-dependency-path: frontend/Civ/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test
       - run: pnpm build
