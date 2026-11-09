@@ -16,6 +16,10 @@ export function clearSession() {
   localStorage.removeItem(USERNAME_KEY);
 }
 
+export function hasToken() {
+  return Boolean(localStorage.getItem(TOKEN_KEY));
+}
+
 export function getUsername() {
   return localStorage.getItem(USERNAME_KEY);
 }
