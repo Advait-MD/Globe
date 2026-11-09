@@ -1,4 +1,5 @@
 """Signup, login and token checks (fixes for issues #1 and #4)."""
+import secrets
 from datetime import datetime, timedelta, timezone
 
 import jwt
@@ -68,7 +69,7 @@ def _forge(sub="alice", secret=None, exp_delta=timedelta(hours=1)):
     "token",
     [
         "not-a-jwt",
-        _forge(secret="attacker-guessed-the-wrong-key-0123456789"),              # signed with the wrong key
+        _forge(secret=secrets.token_urlsafe(48)),              # signed with the wrong key
         _forge(exp_delta=timedelta(seconds=-1)),              # expired
         jwt.encode({"sub": "alice"}, auth.JWT_SECRET, algorithm="HS256"),  # no exp claim
     ],
