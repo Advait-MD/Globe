@@ -75,6 +75,41 @@ Test password: 1234
 
 ---
 
+## Running locally
+
+**Backend** (Python 3.10+)
+```bash
+cd backend
+pip install -r requirements-dev.txt
+cp .env.example .env          # fill in API_KEY and JWT_SECRET
+uvicorn server:app --reload   # http://localhost:8000/docs
+python -m pytest              # run the test suite
+```
+
+**Frontend**
+```bash
+cd frontend/Civ
+pnpm install
+echo "VITE_API_URL=http://localhost:8000" > .env.local
+pnpm dev                      # http://localhost:5173
+```
+
+### API & authentication
+`/signup` and `/login` return a JWT (`access_token`). Every other endpoint requires
+`Authorization: Bearer <token>` and acts only on the token's owner:
+
+| Method | Path | Purpose |
+|---|---|---|
+| POST | `/signup` | Create account, returns token |
+| POST | `/login` | Returns token + `hasPreference` |
+| GET / POST | `/preference` | Read / update your news section |
+| GET | `/news` | Latest stories for your section, with coordinates |
+| DELETE | `/account` | Delete your account |
+
+In Swagger (`/docs`), click **Authorize** and paste the token from `/login`.
+
+---
+
 ## Lernings
 <p align="left">
  Working with SQLite and SQLAlchemy.
