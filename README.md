@@ -83,7 +83,8 @@ cd backend
 pip install -r requirements-dev.txt
 cp .env.example .env          # fill in API_KEY and JWT_SECRET
 uvicorn server:app --reload   # http://localhost:8000/docs
-python -m pytest              # run the test suite
+python -m pytest              # run the test suite (SQLite)
+TEST_DATABASE_URL=postgresql://localhost/globe_test python -m pytest   # ...or against Postgres (wipes that DB)
 ```
 
 **Frontend**
@@ -92,6 +93,7 @@ cd frontend/Civ
 pnpm install
 echo "VITE_API_URL=http://localhost:8000" > .env.local
 pnpm dev                      # http://localhost:5173
+pnpm test                     # unit tests (Vitest)
 ```
 
 ### API & authentication
@@ -107,6 +109,14 @@ pnpm dev                      # http://localhost:5173
 | DELETE | `/account` | Delete your account |
 
 In Swagger (`/docs`), click **Authorize** and paste the token from `/login`.
+
+### How `/news` stays fast
+Everyone who picks the same section sees the same stories, so the located feed is
+built once per section and cached for `FEED_TTL_SECONDS` (default 15 min); a lock
+makes simultaneous requests wait for one build instead of repeating it. Place-name
+coordinates are stored in the `geocode_cache` table, so restarts don't repeat the
+1-request-per-second Nominatim lookups. If the Guardian API fails, the last good
+feed is served.
 
 ---
 
