@@ -50,9 +50,74 @@ def get_nlp():
     return spacy.load("en_core_web_sm")
 
 
-# function to extract location names (countries, cities, regions)
-def extract_locations(text: str) -> list[str]:
-    return [ent.text for ent in get_nlp()(text).ents if ent.label_ in ("GPE", "LOC")]
+# --- telling real places from look-alikes -----------------------------------
+#
+# spaCy's small model sometimes tags non-places as places, and Nominatim will
+# happily geocode almost any word. Real examples from the live technology feed:
+#   "AI"     tagged GPE -> Anguilla (its country code is AI)
+#   "Nvidia" tagged GPE -> an office building in Oregon
+# The filters below were checked against real Nominatim responses.
+
+# Short all-caps entities are usually acronyms ("AI", "EV", "LA" -> Laos);
+# these are the ones that really are places.
+REAL_PLACE_ABBREVIATIONS = {"US", "USA", "UK", "UAE", "NYC", "DRC"}
+
+
+def looks_like_place_name(text: str) -> bool:
+    compact = text.replace(".", "").strip()  # "U.S." -> "US"
+    if not compact:
+        return False
+    if compact.isupper() and len(compact) <= 3:
+        return compact in REAL_PLACE_ABBREVIATIONS
+    return True
+
+
+def extract_entities(text: str) -> tuple[list[str], set[str]]:
+    """Place names (countries, cities, regions) and organisation names in text."""
+    places, orgs = [], set()
+    for ent in get_nlp()(text).ents:
+        if ent.label_ in ("GPE", "LOC") and looks_like_place_name(ent.text):
+            places.append(ent.text)
+        elif ent.label_ == "ORG":
+            orgs.add(ent.text)
+    return places, orgs
+
+
+# Nominatim result classes that are actual places. Companies come back as
+# office/shop/building ("Nvidia" -> office, "Amazon" -> building, "Google" -> shop).
+PLACE_CLASSES = {"boundary", "place"}
+
+# Tiny places only count if they are notable: "Middle East" -> a neighbourhood
+# in Baltimore (importance 0.35), "Trump" -> a hamlet in Ohio (0.13).
+MINOR_PLACE_TYPES = {"neighbourhood", "suburb", "quarter", "hamlet", "isolated_dwelling", "farm", "croft", "locality", "city_block", "plot", "square", "allotments"}
+MIN_MINOR_IMPORTANCE = 0.4
+
+# Ask for a few candidates and keep the most important real place: Nominatim's
+# first answer for "Gaza" is a province of Mozambique (0.48), but Gaza City
+# (0.66) is in the top five.
+GEOCODE_CANDIDATES = 5
+
+
+def _importance(raw: dict) -> float:
+    try:
+        return float(raw.get("importance") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def is_real_place(raw: dict) -> bool:
+    if raw.get("class") not in PLACE_CLASSES:
+        return False
+    kind = raw.get("addresstype") or raw.get("type")
+    if kind in MINOR_PLACE_TYPES and _importance(raw) < MIN_MINOR_IMPORTANCE:
+        return False
+    return True
+
+
+def best_place(candidates):
+    """The most important candidate that is a real place, or None."""
+    places = [c for c in candidates or [] if is_real_place(getattr(c, "raw", {}) or {})]
+    return max(places, key=lambda c: _importance(c.raw), default=None)
 
 
 async def fetch_guardian_results(section: str) -> list:
@@ -96,10 +161,11 @@ def _store_cached(results: dict):
 async def _lookup(name: str):
     """Ask Nominatim. Returns coords, None for "no such place", or _MISSING on error."""
     try:
-        loc = await asyncio.to_thread(geocode, name)
+        candidates = await asyncio.to_thread(geocode, name, exactly_one=False, limit=GEOCODE_CANDIDATES)
     except Exception:
         logger.warning("Geocoding failed for %r", name, exc_info=True)
         return _MISSING  # transient (timeout, 429...): don't remember it
+    loc = best_place(candidates)
     return {"name": name, "lat": loc.latitude, "lon": loc.longitude} if loc else None
 
 
@@ -126,11 +192,20 @@ async def geocode_all(names: list[str]) -> dict:
 async def build_feed(section: str) -> list:
     results = await fetch_guardian_results(section)
 
-    articles = []
+    extracted = []
     for item in results:
         fields = item.get("fields", {})
         text = " ".join([item.get("webTitle", ""), fields.get("headline", ""), fields.get("trailText", "")])
-        articles.append((item, list(dict.fromkeys(extract_locations(text)))))
+        extracted.append((item, *extract_entities(text)))
+
+    # spaCy labels the same name inconsistently ("Nvidia" is ORG in one
+    # headline, GPE in the next). If it's an organisation anywhere in this
+    # feed, don't put it on the map anywhere.
+    organisations = set().union(*(orgs for _, _, orgs in extracted))
+    articles = [
+        (item, [p for p in dict.fromkeys(places) if p not in organisations])
+        for item, places, _ in extracted
+    ]
 
     all_names = list(dict.fromkeys(name for _, names in articles for name in names))
     coords = await geocode_all(all_names)

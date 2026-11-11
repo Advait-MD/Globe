@@ -18,7 +18,9 @@ class GeocodeCache(Base):
     same dead end isn't looked up again at 1 request per second.
     """
 
-    __tablename__ = "geocode_cache"
+    # v2: results are now filtered to real places (see news.is_real_place), so
+    # entries cached under the old rules (e.g. "AI" -> Anguilla) aren't reused.
+    __tablename__ = "geocode_cache_v2"
 
     name = Column(String, primary_key=True)
     lat = Column(Float, nullable=True)
