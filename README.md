@@ -75,51 +75,6 @@ Test password: 1234
 
 ---
 
-## Running locally
-
-**Backend** (Python 3.10+)
-```bash
-cd backend
-pip install -r requirements-dev.txt
-cp .env.example .env          # fill in API_KEY and JWT_SECRET
-uvicorn server:app --reload   # http://localhost:8000/docs
-python -m pytest              # run the test suite (SQLite)
-TEST_DATABASE_URL=postgresql://localhost/globe_test python -m pytest   # ...or against Postgres (wipes that DB)
-```
-
-**Frontend**
-```bash
-cd frontend/Civ
-pnpm install
-echo "VITE_API_URL=http://localhost:8000" > .env.local
-pnpm dev                      # http://localhost:5173
-pnpm test                     # unit tests (Vitest)
-```
-
-### API & authentication
-`/signup` and `/login` return a JWT (`access_token`). Every other endpoint requires
-`Authorization: Bearer <token>` and acts only on the token's owner:
-
-| Method | Path | Purpose |
-|---|---|---|
-| POST | `/signup` | Create account, returns token |
-| POST | `/login` | Returns token + `hasPreference` |
-| GET / POST | `/preference` | Read / update your news section |
-| GET | `/news` | Latest stories for your section, with coordinates |
-| DELETE | `/account` | Delete your account |
-
-In Swagger (`/docs`), click **Authorize** and paste the token from `/login`.
-
-### How `/news` stays fast
-Everyone who picks the same section sees the same stories, so the located feed is
-built once per section and cached for `FEED_TTL_SECONDS` (default 15 min); a lock
-makes simultaneous requests wait for one build instead of repeating it. Place-name
-coordinates are stored in the `geocode_cache` table, so restarts don't repeat the
-1-request-per-second Nominatim lookups. If the Guardian API fails, the last good
-feed is served.
-
----
-
 ## Lernings
 <p align="left">
  Working with SQLite and SQLAlchemy.
