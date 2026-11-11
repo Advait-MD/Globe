@@ -42,7 +42,7 @@ def test_news_uses_the_token_owners_preference(client, make_user, monkeypatch):
         return [{"id": "a1", "webTitle": "Story", "webUrl": "https://example.com/a1", "fields": {"headline": "Story", "trailText": ""}}]
 
     monkeypatch.setattr(news, "fetch_guardian_results", fake_guardian)
-    monkeypatch.setattr(news, "extract_locations", lambda text: [])
+    monkeypatch.setattr(news, "extract_entities", lambda text: ([], set()))
 
     _, _, alice = make_user("alice")
     client.post("/preference", json={"preference": "environment"}, headers=alice)

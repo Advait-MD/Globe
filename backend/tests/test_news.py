@@ -29,19 +29,19 @@ def fakes(monkeypatch):
         return [article(1, "Floods in Paris and Kenya"), article(2, "Paris talks"), article(3, "News from Atlantis")]
 
     def fake_extract(text):
-        return [w for w in ("Paris", "Kenya", "Lagos", "Atlantis") if w in text]
+        return [w for w in ("Paris", "Kenya", "Lagos", "Atlantis") if w in text], set()
 
-    def fake_geocode(name):
+    def fake_geocode(name, exactly_one=True, limit=1):
         calls.geocode.append(name)
         if name in calls.fail_geocode:
             raise TimeoutError("nominatim timed out")
         if name not in PLACES:
             return None
         lat, lon = PLACES[name]
-        return SimpleNamespace(latitude=lat, longitude=lon)
+        return [SimpleNamespace(latitude=lat, longitude=lon, raw={"class": "boundary", "addresstype": "city", "importance": 0.8})]
 
     monkeypatch.setattr(news, "fetch_guardian_results", fake_guardian)
-    monkeypatch.setattr(news, "extract_locations", fake_extract)
+    monkeypatch.setattr(news, "extract_entities", fake_extract)
     monkeypatch.setattr(news, "geocode", fake_geocode)
     return calls
 
