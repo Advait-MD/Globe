@@ -1,0 +1,39 @@
+{
+ "rows": [
+  {
+   "file": "assets/index-DA5yxzHb.js",
+   "raw": 679001,
+   "gzip": 183357,
+   "brotli": 153732
+  },
+  {
+   "file": "macin.svg",
+   "raw": 298039,
+   "gzip": 102102,
+   "brotli": 82604
+  },
+  {
+   "file": "graphics/earth.webp",
+   "raw": 229574,
+   "gzip": 229620,
+   "brotli": 229579
+  },
+  {
+   "file": "assets/index-DJ4_ulWN.css",
+   "raw": 14356,
+   "gzip": 3626,
+   "brotli": 3145
+  },
+  {
+   "file": "index.html",
+   "raw": 453,
+   "gzip": 294,
+   "brotli": 172
+  }
+ ],
+ "js_total": {
+  "raw": 679001,
+  "gzip": 183357,
+  "brotli": 153732
+ }
+}

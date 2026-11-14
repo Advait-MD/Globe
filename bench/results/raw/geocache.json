@@ -1,0 +1,91 @@
+{
+  "runs": [
+    {
+      "refreshes": 3,
+      "lookups": 15,
+      "nominatim": 14,
+      "served_from_db": 1,
+      "hit_pct": 6.666666666666667,
+      "after_cold_start": {
+        "lookups": 0,
+        "nominatim": 0,
+        "hit_pct": null
+      },
+      "per_refresh": [
+        {
+          "section": "technology",
+          "lookups": 3,
+          "nominatim": 3
+        },
+        {
+          "section": "sport",
+          "lookups": 6,
+          "nominatim": 6
+        },
+        {
+          "section": "environment",
+          "lookups": 6,
+          "nominatim": 5
+        }
+      ]
+    },
+    {
+      "refreshes": 3,
+      "lookups": 15,
+      "nominatim": 14,
+      "served_from_db": 1,
+      "hit_pct": 6.666666666666667,
+      "after_cold_start": {
+        "lookups": 0,
+        "nominatim": 0,
+        "hit_pct": null
+      },
+      "per_refresh": [
+        {
+          "section": "technology",
+          "lookups": 3,
+          "nominatim": 3
+        },
+        {
+          "section": "sport",
+          "lookups": 6,
+          "nominatim": 6
+        },
+        {
+          "section": "environment",
+          "lookups": 6,
+          "nominatim": 5
+        }
+      ]
+    },
+    {
+      "refreshes": 3,
+      "lookups": 15,
+      "nominatim": 14,
+      "served_from_db": 1,
+      "hit_pct": 6.666666666666667,
+      "after_cold_start": {
+        "lookups": 0,
+        "nominatim": 0,
+        "hit_pct": null
+      },
+      "per_refresh": [
+        {
+          "section": "technology",
+          "lookups": 3,
+          "nominatim": 3
+        },
+        {
+          "section": "sport",
+          "lookups": 6,
+          "nominatim": 6
+        },
+        {
+          "section": "environment",
+          "lookups": 6,
+          "nominatim": 5
+        }
+      ]
+    }
+  ]
+}

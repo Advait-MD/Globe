@@ -1,0 +1,458 @@
+[
+ {
+  "t": 1794660081.3009946,
+  "section": "technology",
+  "results": [
+   {
+    "id": "technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage",
+    "webTitle": "Microsoft says services fully restored after global outage hits governments",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage",
+    "fields": {
+     "headline": "Microsoft says services fully restored after global outage hits governments",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/microsoft-outage-shakes-up-companies-local-governments",
+    "webTitle": "Microsoft outage shakes up companies, schools and local governments across US",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/microsoft-outage-shakes-up-companies-local-governments",
+    "fields": {
+     "headline": "Microsoft outage shakes up companies, schools and local governments across US",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/live/2026/nov/13/microsoft-outage-down-today-live-update-outlook-teams-365-when-fixed-latest-status-cause-news",
+    "webTitle": "Microsoft \u2018deeply sorry\u2019 for disruption affecting millions and says it\u2019s \u2018not related to cyber or AI\u2019 \u2013 as it happened",
+    "webUrl": "https://www.theguardian.com/technology/live/2026/nov/13/microsoft-outage-down-today-live-update-outlook-teams-365-when-fixed-latest-status-cause-news",
+    "fields": {
+     "headline": "Microsoft \u2018deeply sorry\u2019 for disruption affecting millions and says it\u2019s \u2018not related to cyber or AI\u2019 \u2013 as it happened",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china",
+    "webTitle": "Nvidia scandal: US treasury chief blames Lutnick\u2019s commerce department over alleged lack of action",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china",
+    "fields": {
+     "headline": "Nvidia scandal: US treasury chief blames Lutnick\u2019s commerce department over alleged lack of action",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/how-microsoft-outage-has-affected-key-public-services-in-the-uk",
+    "webTitle": "How Microsoft outage has affected key public services in the UK",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/how-microsoft-outage-has-affected-key-public-services-in-the-uk",
+    "fields": {
+     "headline": "How Microsoft outage has affected key public services in the UK",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/microsoft-outage-hits-nhs-hospitals-gps-schools-and-police-across-uk",
+    "webTitle": "Microsoft outage hits hospitals, GPs, schools and police across UK ",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/microsoft-outage-hits-nhs-hospitals-gps-schools-and-police-across-uk",
+    "fields": {
+     "headline": "Microsoft outage hits hospitals, GPs, schools and police across UK ",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/how-it-feels-to-battle-with-a-flood-of-ai-generated-complaints",
+    "webTitle": "How it feels to battle with a flood of AI-generated complaints",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/how-it-feels-to-battle-with-a-flood-of-ai-generated-complaints",
+    "fields": {
+     "headline": "How it feels to battle with a flood of AI-generated complaints",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/microsoft-outage-outlook-teams-word-excel-reports",
+    "webTitle": "Microsoft scrambles to fix global outage affecting Teams and Outlook",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/microsoft-outage-outlook-teams-word-excel-reports",
+    "fields": {
+     "headline": "Microsoft scrambles to fix global outage affecting Teams and Outlook",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "australia-news/2026/nov/13/global-microsoft-outage-what-happened-and-why",
+    "webTitle": "A global Microsoft 365 outage has hit millions \u2013 what happened and when will it be fixed?",
+    "webUrl": "https://www.theguardian.com/australia-news/2026/nov/13/global-microsoft-outage-what-happened-and-why",
+    "fields": {
+     "headline": "A global Microsoft 365 outage has hit millions \u2013 what happened and when will it be fixed?",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "technology/2026/nov/13/marlon-brando-cool-jensen-huang-joke-black-leather-jacket-nvidia",
+    "webTitle": "Marlon Brando cool to Jensen Huang joke: how the black leather jacket became a meme",
+    "webUrl": "https://www.theguardian.com/technology/2026/nov/13/marlon-brando-cool-jensen-huang-joke-black-leather-jacket-nvidia",
+    "fields": {
+     "headline": "Marlon Brando cool to Jensen Huang joke: how the black leather jacket became a meme",
+     "trailText": ""
+    }
+   }
+  ],
+  "production_locations": {
+   "technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage": [],
+   "technology/2026/nov/13/microsoft-outage-shakes-up-companies-local-governments": [
+    {
+     "name": "US",
+     "lat": 39.7837304,
+     "lon": -100.445882
+    }
+   ],
+   "technology/live/2026/nov/13/microsoft-outage-down-today-live-update-outlook-teams-365-when-fixed-latest-status-cause-news": [],
+   "technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china": [
+    {
+     "name": "US",
+     "lat": 39.7837304,
+     "lon": -100.445882
+    }
+   ],
+   "technology/2026/nov/13/how-microsoft-outage-has-affected-key-public-services-in-the-uk": [
+    {
+     "name": "UK",
+     "lat": 54.7023545,
+     "lon": -3.2765753
+    }
+   ],
+   "technology/2026/nov/13/microsoft-outage-hits-nhs-hospitals-gps-schools-and-police-across-uk": [
+    {
+     "name": "UK",
+     "lat": 54.7023545,
+     "lon": -3.2765753
+    }
+   ],
+   "technology/2026/nov/13/how-it-feels-to-battle-with-a-flood-of-ai-generated-complaints": [],
+   "technology/2026/nov/13/microsoft-outage-outlook-teams-word-excel-reports": [],
+   "australia-news/2026/nov/13/global-microsoft-outage-what-happened-and-why": [],
+   "technology/2026/nov/13/marlon-brando-cool-jensen-huang-joke-black-leather-jacket-nvidia": [
+    {
+     "name": "Hollywood",
+     "lat": 34.0980031,
+     "lon": -118.329523
+    }
+   ]
+  }
+ },
+ {
+  "t": 1794660081.3501303,
+  "section": "sport",
+  "results": [
+   {
+    "id": "sport/live/2026/nov/14/cheltenham-november-meeting-horse-racing-live",
+    "webTitle": "Cheltenham November meeting horse racing \u2013 live",
+    "webUrl": "https://www.theguardian.com/sport/live/2026/nov/14/cheltenham-november-meeting-horse-racing-live",
+    "fields": {
+     "headline": "Cheltenham November meeting horse racing \u2013 live",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/14/england-first-test-zimbabwe-since-1996-cricket-exclusive",
+    "webTitle": "England ready to play first Test in Zimbabwe since bad-tempered 1996 tour",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/14/england-first-test-zimbabwe-since-1996-cricket-exclusive",
+    "fields": {
+     "headline": "England ready to play first Test in Zimbabwe since bad-tempered 1996 tour",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/14/david-warner-statement-sandpapergate-ball-tampering-australia-cricket-ntwnfb",
+    "webTitle": "\u2018Stinks of a cover-up\u2019: David Warner fans flames with new sandpapergate claim",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/14/david-warner-statement-sandpapergate-ball-tampering-australia-cricket-ntwnfb",
+    "fields": {
+     "headline": "\u2018Stinks of a cover-up\u2019: David Warner fans flames with new sandpapergate claim",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/14/scientists-find-blood-biomarker-cte-diagnosis-rugby-american-football",
+    "webTitle": "Scientists find blood biomarker that opens door to CTE diagnosis in living patients",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/14/scientists-find-blood-biomarker-cte-diagnosis-rugby-american-football",
+    "fields": {
+     "headline": "Scientists find blood biomarker that opens door to CTE diagnosis in living patients",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/france-south-africa-nations-championship-match-report",
+    "webTitle": "France cling on for furious victory against South Africa after Dupont sizzles",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/france-south-africa-nations-championship-match-report",
+    "fields": {
+     "headline": "France cling on for furious victory against South Africa after Dupont sizzles",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/sandpaper-affair-australia-pat-cummins-cricket-england-scandal",
+    "webTitle": "A cricketing drama to divide a nation: why the sandpaper scandal is Australia\u2019s Bazball",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/sandpaper-affair-australia-pat-cummins-cricket-england-scandal",
+    "fields": {
+     "headline": "A cricketing drama to divide a nation: why the sandpaper scandal is Australia\u2019s Bazball",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/jonbon-shines-trying-day-troubled-home-of-jumps-racing-cheltenham-horse-racing-tips",
+    "webTitle": "Jonbon shines on yet another trying day for troubled home of jumps racing",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/jonbon-shines-trying-day-troubled-home-of-jumps-racing-cheltenham-horse-racing-tips",
+    "fields": {
+     "headline": "Jonbon shines on yet another trying day for troubled home of jumps racing",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/maro-itoje-england-sleepwalk-eddie-jones-japan-rugby-union",
+    "webTitle": "Maro Itoje warns England not to sleepwalk into clash with Eddie Jones\u2019s Japan",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/maro-itoje-england-sleepwalk-eddie-jones-japan-rugby-union",
+    "fields": {
+     "headline": "Maro Itoje warns England not to sleepwalk into clash with Eddie Jones\u2019s Japan",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/rugby-league-world-cup-finals-atp-and-wta-tennis-plus-wsl-follow-with-us",
+    "webTitle": "Rugby League World Cup finals, ATP and WTA tennis, plus WSL \u2013 follow with us",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/rugby-league-world-cup-finals-atp-and-wta-tennis-plus-wsl-follow-with-us",
+    "fields": {
+     "headline": "Rugby League World Cup finals, ATP and WTA tennis, plus WSL \u2013 follow with us",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "sport/2026/nov/13/england-have-licence-to-thrill-against-japan-after-acing-audition-against-australia",
+    "webTitle": "England have licence to thrill against Japan after acing audition against Australia",
+    "webUrl": "https://www.theguardian.com/sport/2026/nov/13/england-have-licence-to-thrill-against-japan-after-acing-audition-against-australia",
+    "fields": {
+     "headline": "England have licence to thrill against Japan after acing audition against Australia",
+     "trailText": ""
+    }
+   }
+  ],
+  "production_locations": {
+   "sport/live/2026/nov/14/cheltenham-november-meeting-horse-racing-live": [],
+   "sport/2026/nov/14/england-first-test-zimbabwe-since-1996-cricket-exclusive": [
+    {
+     "name": "England",
+     "lat": 52.5310214,
+     "lon": -1.2649062
+    },
+    {
+     "name": "Zimbabwe",
+     "lat": -18.4554963,
+     "lon": 29.7468414
+    }
+   ],
+   "sport/2026/nov/14/david-warner-statement-sandpapergate-ball-tampering-australia-cricket-ntwnfb": [],
+   "sport/2026/nov/14/scientists-find-blood-biomarker-cte-diagnosis-rugby-american-football": [],
+   "sport/2026/nov/13/france-south-africa-nations-championship-match-report": [
+    {
+     "name": "France",
+     "lat": 46.603354,
+     "lon": 1.8883335
+    },
+    {
+     "name": "South Africa",
+     "lat": -28.8166236,
+     "lon": 24.991639
+    }
+   ],
+   "sport/2026/nov/13/sandpaper-affair-australia-pat-cummins-cricket-england-scandal": [
+    {
+     "name": "Australia",
+     "lat": -24.7761086,
+     "lon": 134.755
+    }
+   ],
+   "sport/2026/nov/13/jonbon-shines-trying-day-troubled-home-of-jumps-racing-cheltenham-horse-racing-tips": [],
+   "sport/2026/nov/13/maro-itoje-england-sleepwalk-eddie-jones-japan-rugby-union": [
+    {
+     "name": "England",
+     "lat": 52.5310214,
+     "lon": -1.2649062
+    }
+   ],
+   "sport/2026/nov/13/rugby-league-world-cup-finals-atp-and-wta-tennis-plus-wsl-follow-with-us": [],
+   "sport/2026/nov/13/england-have-licence-to-thrill-against-japan-after-acing-audition-against-australia": [
+    {
+     "name": "England",
+     "lat": 52.5310214,
+     "lon": -1.2649062
+    },
+    {
+     "name": "Japan",
+     "lat": 36.5748441,
+     "lon": 139.2394179
+    },
+    {
+     "name": "Australia",
+     "lat": -24.7761086,
+     "lon": 134.755
+    }
+   ]
+  }
+ },
+ {
+  "t": 1794660087.968425,
+  "section": "environment",
+  "results": [
+   {
+    "id": "environment/2026/nov/14/greenpeace-boulders-norfolk-vanguard-windfarms",
+    "webTitle": "Greenpeace boulders may delay building of \u00a312bn windfarms in North Sea",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/14/greenpeace-boulders-norfolk-vanguard-windfarms",
+    "fields": {
+     "headline": "Greenpeace boulders may delay building of \u00a312bn windfarms in North Sea",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/14/bristol-first-uk-wetland-city-flood",
+    "webTitle": "Bristol aims to become UK\u2019s first \u2018wetland city\u2019 and reduce flood risk",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/14/bristol-first-uk-wetland-city-flood",
+    "fields": {
+     "headline": "Bristol aims to become UK\u2019s first \u2018wetland city\u2019 and reduce flood risk",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/14/salmon-organic-british-farmed-environmental-welfare",
+    "webTitle": "\u2018An environmental and welfare disaster\u2019: British salmon loses its organic status",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/14/salmon-organic-british-farmed-environmental-welfare",
+    "fields": {
+     "headline": "\u2018An environmental and welfare disaster\u2019: British salmon loses its organic status",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/14/country-diary-one-of-britains-oldest-surviving-traditions-and-its-all-over-in-four-minutes",
+    "webTitle": "Country diary: One of Britain\u2019s oldest surviving traditions \u2013 and it\u2019s all over in four minutes",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/14/country-diary-one-of-britains-oldest-surviving-traditions-and-its-all-over-in-four-minutes",
+    "fields": {
+     "headline": "Country diary: One of Britain\u2019s oldest surviving traditions \u2013 and it\u2019s all over in four minutes",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/14/rising-tide-protest-newcastle-coal-port-blockade-nsw-police-ntwnfb",
+    "webTitle": "Hundreds take to water for Newcastle coal port protest despite attempt by NSW police to stop them",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/14/rising-tide-protest-newcastle-coal-port-blockade-nsw-police-ntwnfb",
+    "fields": {
+     "headline": "Hundreds take to water for Newcastle coal port protest despite attempt by NSW police to stop them",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/13/anthony-albaneses-coffee-diplomacy-cant-remove-shadow-of-domestic-politics-at-cop31",
+    "webTitle": "Anthony Albanese\u2019s coffee diplomacy can\u2019t remove shadow of domestic politics at Cop31",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/13/anthony-albaneses-coffee-diplomacy-cant-remove-shadow-of-domestic-politics-at-cop31",
+    "fields": {
+     "headline": "Anthony Albanese\u2019s coffee diplomacy can\u2019t remove shadow of domestic politics at Cop31",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/13/cop31-antonio-guterres-united-nations-climate-action",
+    "webTitle": "\u2018You cannot build peace on a burning planet,\u2019 UN chief tells Cop31 in farewell speech",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/13/cop31-antonio-guterres-united-nations-climate-action",
+    "fields": {
+     "headline": "\u2018You cannot build peace on a burning planet,\u2019 UN chief tells Cop31 in farewell speech",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/13/california-gavin-newsom-endorses-fossil-fuel-phaseout",
+    "webTitle": "California governor Gavin Newsom endorses global fossil fuel phaseout",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/13/california-gavin-newsom-endorses-fossil-fuel-phaseout",
+    "fields": {
+     "headline": "California governor Gavin Newsom endorses global fossil fuel phaseout",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/2026/nov/13/right-to-make-green-challenges-planning-decisions-under-threat-aarhus-convention",
+    "webTitle": "Right to make green challenges to planning decisions under threat, say UK lawyers",
+    "webUrl": "https://www.theguardian.com/environment/2026/nov/13/right-to-make-green-challenges-planning-decisions-under-threat-aarhus-convention",
+    "fields": {
+     "headline": "Right to make green challenges to planning decisions under threat, say UK lawyers",
+     "trailText": ""
+    }
+   },
+   {
+    "id": "environment/live/2026/nov/13/cop31-climate-crisis-talks-turkey-latest-news-updates",
+    "webTitle": "Cop31 as it happened: \u2018You cannot build peace on a burning planet\u2019, warns UN chief Guterres in final climate summit speech",
+    "webUrl": "https://www.theguardian.com/environment/live/2026/nov/13/cop31-climate-crisis-talks-turkey-latest-news-updates",
+    "fields": {
+     "headline": "Cop31 as it happened: \u2018You cannot build peace on a burning planet\u2019, warns UN chief Guterres in final climate summit speech",
+     "trailText": ""
+    }
+   }
+  ],
+  "production_locations": {
+   "environment/2026/nov/14/greenpeace-boulders-norfolk-vanguard-windfarms": [
+    {
+     "name": "North Sea",
+     "lat": 56.0026997,
+     "lon": 2.8144673
+    },
+    {
+     "name": "Norfolk",
+     "lat": 52.666667,
+     "lon": 1.0
+    }
+   ],
+   "environment/2026/nov/14/bristol-first-uk-wetland-city-flood": [
+    {
+     "name": "UK",
+     "lat": 54.7023545,
+     "lon": -3.2765753
+    }
+   ],
+   "environment/2026/nov/14/salmon-organic-british-farmed-environmental-welfare": [],
+   "environment/2026/nov/14/country-diary-one-of-britains-oldest-surviving-traditions-and-its-all-over-in-four-minutes": [
+    {
+     "name": "Britain",
+     "lat": 54.7023545,
+     "lon": -3.2765753
+    }
+   ],
+   "environment/2026/nov/14/rising-tide-protest-newcastle-coal-port-blockade-nsw-police-ntwnfb": [
+    {
+     "name": "Newcastle",
+     "lat": 54.9738474,
+     "lon": -1.6131572
+    }
+   ],
+   "environment/2026/nov/13/anthony-albaneses-coffee-diplomacy-cant-remove-shadow-of-domestic-politics-at-cop31": [
+    {
+     "name": "Turkey",
+     "lat": 39.294076,
+     "lon": 35.2316631
+    }
+   ],
+   "environment/2026/nov/13/cop31-antonio-guterres-united-nations-climate-action": [],
+   "environment/2026/nov/13/california-gavin-newsom-endorses-fossil-fuel-phaseout": [
+    {
+     "name": "California",
+     "lat": 36.7014631,
+     "lon": -118.755997
+    },
+    {
+     "name": "US",
+     "lat": 39.7837304,
+     "lon": -100.445882
+    }
+   ],
+   "environment/2026/nov/13/right-to-make-green-challenges-planning-decisions-under-threat-aarhus-convention": [
+    {
+     "name": "UK",
+     "lat": 54.7023545,
+     "lon": -3.2765753
+    }
+   ],
+   "environment/live/2026/nov/13/cop31-climate-crisis-talks-turkey-latest-news-updates": []
+  }
+ }
+]

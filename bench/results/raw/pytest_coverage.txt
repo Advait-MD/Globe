@@ -1,0 +1,15 @@
+........................................................................ [ 79%]
+...................                                                      [100%]
+---------- coverage: platform linux, python 3.13.18-final-0 ----------
+Name          Stmts   Miss  Cover
+---------------------------------
+auth.py          48      2    96%
+database.py      15      0   100%
+models.py        13      0   100%
+news.py         138     13    91%
+schemas.py       18      0   100%
+server.py        76     10    87%
+---------------------------------
+TOTAL           308     25    92%
+Coverage JSON written to file /home/user/Globe/bench/results/raw/coverage_backend.json
+91 passed in 13.00s

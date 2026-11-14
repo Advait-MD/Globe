@@ -1,0 +1,750 @@
+{
+ "US": {
+  "results": [
+   {
+    "place_id": 52391348,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 148838,
+    "lat": "39.7837304",
+    "lon": "-100.4458820",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 1.0,
+    "addresstype": "country",
+    "name": "United States",
+    "display_name": "United States",
+    "boundingbox": [
+     "-14.7608358",
+     "71.5889534",
+     "-180.0000000",
+     "180.0000000"
+    ]
+   },
+   {
+    "place_id": 308696632,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 286898,
+    "lat": "17.7891870",
+    "lon": "-64.7080574",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 8,
+    "importance": 0.721770326543945,
+    "addresstype": "state",
+    "name": "United States Virgin Islands",
+    "display_name": "United States Virgin Islands, United States",
+    "boundingbox": [
+     "17.6234680",
+     "18.4649840",
+     "-65.1541175",
+     "-64.5126740"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 291.4949560000082,
+  "recorded_at": 1794660163.0425513
+ },
+ "Nvidia": {
+  "results": [
+   {
+    "place_id": 325633203,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 9576319498,
+    "lat": "45.5344957",
+    "lon": "-122.8862740",
+    "class": "office",
+    "type": "company",
+    "place_rank": 30,
+    "importance": 0.606460208118899,
+    "addresstype": "office",
+    "name": "nVidia",
+    "display_name": "nVidia, Northeast Walker Road, Amberglen, Hillsboro, Washington County, Oregon, 97129, United States",
+    "boundingbox": [
+     "45.5344457",
+     "45.5345457",
+     "-122.8863240",
+     "-122.8862240"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 35.83427099999881,
+  "recorded_at": 1794660163.8870294
+ },
+ "UK": {
+  "results": [
+   {
+    "place_id": 274782588,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 62149,
+    "lat": "54.7023545",
+    "lon": "-3.2765753",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.9388533772580386,
+    "addresstype": "country",
+    "name": "United Kingdom",
+    "display_name": "United Kingdom",
+    "boundingbox": [
+     "49.6740000",
+     "61.0610000",
+     "-14.0155170",
+     "2.0919117"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 33.297609999976885,
+  "recorded_at": 1794660164.984672
+ },
+ "England": {
+  "results": [
+   {
+    "place_id": 276612002,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 58447,
+    "lat": "52.5310214",
+    "lon": "-1.2649062",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 8,
+    "importance": 0.8954187298341272,
+    "addresstype": "state",
+    "name": "England",
+    "display_name": "England, United Kingdom",
+    "boundingbox": [
+     "49.6740000",
+     "55.9170000",
+     "-6.7047494",
+     "2.0919117"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 33.16545499995982,
+  "recorded_at": 1794660166.0847304
+ },
+ "Zimbabwe": {
+  "results": [
+   {
+    "place_id": 34632307,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 195272,
+    "lat": "-18.4554963",
+    "lon": "29.7468414",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.7492574753373813,
+    "addresstype": "country",
+    "name": "Zimbabwe",
+    "display_name": "Zimbabwe",
+    "boundingbox": [
+     "-22.4241096",
+     "-15.6097033",
+     "25.2373000",
+     "33.0683501"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 32.361254000022655,
+  "recorded_at": 1794660167.1840649
+ },
+ "France": {
+  "results": [
+   {
+    "place_id": 301336104,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 2202162,
+    "lat": "46.6033540",
+    "lon": "1.8883335",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.9781609870055644,
+    "addresstype": "country",
+    "name": "France",
+    "display_name": "France",
+    "boundingbox": [
+     "-50.2187169",
+     "51.3055721",
+     "-178.3873749",
+     "172.3057152"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 33.363394999980756,
+  "recorded_at": 1794660168.285222
+ },
+ "South Africa": {
+  "results": [
+   {
+    "place_id": 34156828,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 87565,
+    "lat": "-28.8166236",
+    "lon": "24.9916390",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.841784323429412,
+    "addresstype": "country",
+    "name": "South Africa",
+    "display_name": "South Africa",
+    "boundingbox": [
+     "-47.1788335",
+     "-22.1250301",
+     "16.3335213",
+     "38.2898954"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 34.040172999993956,
+  "recorded_at": 1794660169.3860323
+ },
+ "Australia": {
+  "results": [
+   {
+    "place_id": 34362176,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 80500,
+    "lat": "-24.7761086",
+    "lon": "134.7550000",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.9007373714659365,
+    "addresstype": "country",
+    "name": "Australia",
+    "display_name": "Australia",
+    "boundingbox": [
+     "-55.3228175",
+     "-9.0880125",
+     "72.2461932",
+     "168.2261259"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 43.335877000004075,
+  "recorded_at": 1794660170.495462
+ },
+ "Japan": {
+  "results": [
+   {
+    "place_id": 263621913,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 382313,
+    "lat": "36.5748441",
+    "lon": "139.2394179",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.9383765725984483,
+    "addresstype": "country",
+    "name": "日本",
+    "display_name": "日本",
+    "boundingbox": [
+     "20.2145811",
+     "45.7112046",
+     "122.7141754",
+     "154.2055410"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 33.47916999996414,
+  "recorded_at": 1794660171.5857716
+ },
+ "North Sea Greenpeace": {
+  "results": [],
+  "error": null,
+  "ms": 32.182713999986845,
+  "recorded_at": 1794660172.6846325
+ },
+ "North Sea": {
+  "results": [
+   {
+    "place_id": 429155385,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 9051063,
+    "lat": "56.0026997",
+    "lon": "2.8144673",
+    "class": "place",
+    "type": "sea",
+    "place_rank": 2,
+    "importance": 0.7256301873266088,
+    "addresstype": "sea",
+    "name": "North Sea / Nordsee / Noordzee / Nordsøen / Nordsjøen / Mer du Nord",
+    "display_name": "North Sea / Nordsee / Noordzee / Nordsøen / Nordsjøen / Mer du Nord",
+    "boundingbox": [
+     "50.9864395",
+     "61.0341496",
+     "-4.0388503",
+     "8.5893022"
+    ]
+   },
+   {
+    "place_id": 160128946,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 7096172021,
+    "lat": "56.0027600",
+    "lon": "3.0001290",
+    "class": "place",
+    "type": "sea",
+    "place_rank": 2,
+    "importance": 0.7256301873266088,
+    "addresstype": "sea",
+    "name": "North Sea / Nordsee / Noordzee / Nordsøen / Nordsjøen / Mer du Nord",
+    "display_name": "North Sea / Nordsee / Noordzee / Nordsøen / Nordsjøen / Mer du Nord",
+    "boundingbox": [
+     "56.0027100",
+     "56.0028100",
+     "3.0000790",
+     "3.0001790"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 32.936721999988094,
+  "recorded_at": 1794660173.7855885
+ },
+ "Britain": {
+  "results": [
+   {
+    "place_id": 424643758,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 6038068,
+    "lat": "54.3151594",
+    "lon": "-1.9181532",
+    "class": "place",
+    "type": "island",
+    "place_rank": 17,
+    "importance": 0.7491806990308624,
+    "addresstype": "island",
+    "name": "Great Britain",
+    "display_name": "Great Britain, United Kingdom",
+    "boundingbox": [
+     "49.9586992",
+     "58.6720780",
+     "-6.2278849",
+     "1.7632199"
+    ]
+   },
+   {
+    "place_id": 275211732,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 62149,
+    "lat": "54.7023545",
+    "lon": "-3.2765753",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.9388533772580386,
+    "addresstype": "country",
+    "name": "United Kingdom",
+    "display_name": "United Kingdom",
+    "boundingbox": [
+     "49.6740000",
+     "61.0610000",
+     "-14.0155170",
+     "2.0919117"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 36.56962600001634,
+  "recorded_at": 1794660174.8893807
+ },
+ "Newcastle": {
+  "results": [
+   {
+    "place_id": 274326666,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 142282,
+    "lat": "54.9738474",
+    "lon": "-1.6131572",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.6753066932424819,
+    "addresstype": "city",
+    "name": "Newcastle upon Tyne",
+    "display_name": "Newcastle upon Tyne, Tyne and Wear, North East, England, United Kingdom",
+    "boundingbox": [
+     "54.9590320",
+     "55.0793823",
+     "-1.7756721",
+     "-1.5292003"
+    ]
+   },
+   {
+    "place_id": 23218657,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 5989933,
+    "lat": "-32.9192953",
+    "lon": "151.7795348",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 18,
+    "importance": 0.6015185985164261,
+    "addresstype": "suburb",
+    "name": "Newcastle",
+    "display_name": "Newcastle, Newcastle-Maitland, New South Wales, 2300, Australia",
+    "boundingbox": [
+     "-32.9378050",
+     "-32.9014820",
+     "151.7596295",
+     "151.8039320"
+    ]
+   },
+   {
+    "place_id": 23269230,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 25841904,
+    "lat": "-32.9272881",
+    "lon": "151.7812534",
+    "class": "place",
+    "type": "city",
+    "place_rank": 16,
+    "importance": 0.6015185985164261,
+    "addresstype": "city",
+    "name": "Newcastle",
+    "display_name": "Newcastle, Newcastle-Maitland, New South Wales, 2300, Australia",
+    "boundingbox": [
+     "-33.0872881",
+     "-32.7672881",
+     "151.6212534",
+     "151.9412534"
+    ]
+   },
+   {
+    "place_id": 277474508,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 29813785,
+    "lat": "53.0102824",
+    "lon": "-2.2261012",
+    "class": "place",
+    "type": "town",
+    "place_rank": 18,
+    "importance": 0.4809672537842,
+    "addresstype": "town",
+    "name": "Newcastle-under-Lyme",
+    "display_name": "Newcastle-under-Lyme, Staffordshire, England, ST5 1AD, United Kingdom",
+    "boundingbox": [
+     "52.9702824",
+     "53.0502824",
+     "-2.2661012",
+     "-2.1861012"
+    ]
+   },
+   {
+    "place_id": 329924679,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 13574044,
+    "lat": "33.1929150",
+    "lon": "-98.7375358",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.45881286497844737,
+    "addresstype": "village",
+    "name": "Newcastle",
+    "display_name": "Newcastle, Young County, Texas, United States",
+    "boundingbox": [
+     "33.1830305",
+     "33.2075675",
+     "-98.7539432",
+     "-98.7315096"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 32.114745999990646,
+  "recorded_at": 1794660175.9850702
+ },
+ "California": {
+  "results": [
+   {
+    "place_id": 317389463,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 165475,
+    "lat": "36.7014631",
+    "lon": "-118.7559970",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 8,
+    "importance": 0.8641679537633348,
+    "addresstype": "state",
+    "name": "California",
+    "display_name": "California, United States",
+    "boundingbox": [
+     "32.5295236",
+     "42.0094990",
+     "-124.4820030",
+     "-114.1307816"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 36.08227400002306,
+  "recorded_at": 1794660177.0892916
+ },
+ "Hollywood": {
+  "results": [
+   {
+    "place_id": 321456729,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "node",
+    "osm_id": 1830231415,
+    "lat": "34.0980031",
+    "lon": "-118.3295230",
+    "class": "place",
+    "type": "suburb",
+    "place_rank": 19,
+    "importance": 0.7360103139294639,
+    "addresstype": "suburb",
+    "name": "Hollywood",
+    "display_name": "Hollywood, Los Angeles, Los Angeles County, California, 90028, United States",
+    "boundingbox": [
+     "34.0780031",
+     "34.1180031",
+     "-118.3495230",
+     "-118.3095230"
+    ]
+   },
+   {
+    "place_id": 303610574,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 117954,
+    "lat": "26.0112014",
+    "lon": "-80.1494901",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.5840433201914151,
+    "addresstype": "suburb",
+    "name": "Hollywood",
+    "display_name": "Hollywood, Broward County, Florida, United States",
+    "boundingbox": [
+     "25.9864172",
+     "26.0933605",
+     "-80.2487688",
+     "-80.1053365"
+    ]
+   },
+   {
+    "place_id": 341989440,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 13812414,
+    "lat": "34.7242500",
+    "lon": "-85.9724787",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.43753274145943666,
+    "addresstype": "village",
+    "name": "Hollywood",
+    "display_name": "Hollywood, Jackson County, Alabama, 35752, United States",
+    "boundingbox": [
+     "34.6861410",
+     "34.7644987",
+     "-85.9908719",
+     "-85.9017990"
+    ]
+   },
+   {
+    "place_id": 344187163,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 194131,
+    "lat": "32.7343442",
+    "lon": "-80.2417651",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.3572718937775532,
+    "addresstype": "town",
+    "name": "Hollywood",
+    "display_name": "Hollywood, Charleston County, South Carolina, 29449, United States",
+    "boundingbox": [
+     "32.7049880",
+     "32.8144720",
+     "-80.3453270",
+     "-80.1210380"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 304.2154520001077,
+  "recorded_at": 1794661701.9187539
+ },
+ "Norfolk": {
+  "results": [
+   {
+    "place_id": 159302710,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 57397,
+    "lat": "52.6666670",
+    "lon": "1.0000000",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 12,
+    "importance": 0.6819891409406672,
+    "addresstype": "county",
+    "name": "Norfolk",
+    "display_name": "Norfolk, England, United Kingdom",
+    "boundingbox": [
+     "52.3553354",
+     "52.9916398",
+     "0.1536217",
+     "1.7457818"
+    ]
+   },
+   {
+    "place_id": 347577276,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 206672,
+    "lat": "36.8493695",
+    "lon": "-76.2899539",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 12,
+    "importance": 0.6525396172289414,
+    "addresstype": "city",
+    "name": "Norfolk",
+    "display_name": "Norfolk, Virginia, United States",
+    "boundingbox": [
+     "36.8207991",
+     "36.9697231",
+     "-76.3448722",
+     "-76.1767248"
+    ]
+   },
+   {
+    "place_id": 27299712,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 2574988,
+    "lat": "-29.0328038",
+    "lon": "167.9483137",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 8,
+    "importance": 0.6144170949689121,
+    "addresstype": "territory",
+    "name": "Norfolk Island",
+    "display_name": "Norfolk Island, Australia",
+    "boundingbox": [
+     "-29.3370694",
+     "-28.7936626",
+     "167.6856728",
+     "168.2261259"
+    ]
+   },
+   {
+    "place_id": 363159450,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 1840539,
+    "lat": "42.1538607",
+    "lon": "-71.1828015",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 12,
+    "importance": 0.5448946432915528,
+    "addresstype": "county",
+    "name": "Norfolk County",
+    "display_name": "Norfolk County, Massachusetts, United States",
+    "boundingbox": [
+     "41.9850832",
+     "42.3517551",
+     "-71.5030779",
+     "-70.7384338"
+    ]
+   },
+   {
+    "place_id": 330756930,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 169486,
+    "lat": "42.0283379",
+    "lon": "-97.4169964",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 16,
+    "importance": 0.4916826333919277,
+    "addresstype": "city",
+    "name": "Norfolk",
+    "display_name": "Norfolk, Madison County, Nebraska, United States",
+    "boundingbox": [
+     "42.0023100",
+     "42.0619900",
+     "-97.4667140",
+     "-97.3759900"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 34.43907199994101,
+  "recorded_at": 1794661702.7491357
+ },
+ "Turkey": {
+  "results": [
+   {
+    "place_id": 207751672,
+    "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+    "osm_type": "relation",
+    "osm_id": 174737,
+    "lat": "39.2940760",
+    "lon": "35.2316631",
+    "class": "boundary",
+    "type": "administrative",
+    "place_rank": 4,
+    "importance": 0.8788776015992956,
+    "addresstype": "country",
+    "name": "Türkiye",
+    "display_name": "Türkiye",
+    "boundingbox": [
+     "35.8058974",
+     "42.2970000",
+     "25.5656305",
+     "44.8176638"
+    ]
+   }
+  ],
+  "error": null,
+  "ms": 34.6067979999134,
+  "recorded_at": 1794661703.8494313
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "source": "GitHub Actions API list_workflow_runs (tests.yml, status=completed), runs 3-13 = current workflow; all 13 runs concluded success",
+ "duration_definition": "updated_at - run_started_at (wall clock, both jobs run in parallel)",
+ "runs": [
+  {
+   "run": 13,
+   "event": "push",
+   "branch": "main",
+   "seconds": 58.0
+  },
+  {
+   "run": 12,
+   "event": "push",
+   "branch": "main",
+   "seconds": 65.0
+  },
+  {
+   "run": 11,
+   "event": "pull_request",
+   "branch": "claude/project-keywords-resume-nentw1",
+   "seconds": 59.0
+  },
+  {
+   "run": 10,
+   "event": "push",
+   "branch": "claude/project-keywords-resume-nentw1",
+   "seconds": 70.0
+  },
+  {
+   "run": 9,
+   "event": "push",
+   "branch": "claude/project-keywords-resume-nentw1-perf-ux",
+   "seconds": 52.0
+  },
+  {
+   "run": 8,
+   "event": "pull_request",
+   "branch": "main",
+   "seconds": 64.0
+  },
+  {
+   "run": 7,
+   "event": "push",
+   "branch": "main",
+   "seconds": 66.0
+  },
+  {
+   "run": 6,
+   "event": "pull_request",
+   "branch": "claude/project-keywords-resume-nentw1",
+   "seconds": 57.0
+  },
+  {
+   "run": 5,
+   "event": "push",
+   "branch": "claude/project-keywords-resume-nentw1",
+   "seconds": 66.0
+  },
+  {
+   "run": 4,
+   "event": "pull_request",
+   "branch": "claude/project-keywords-resume-nentw1-perf-ux",
+   "seconds": 61.0
+  },
+  {
+   "run": 3,
+   "event": "push",
+   "branch": "claude/project-keywords-resume-nentw1-perf-ux",
+   "seconds": 66.0
+  }
+ ],
+ "median_s": 64.0,
+ "min_s": 52.0,
+ "max_s": 70.0,
+ "success_rate": "13/13"
+}

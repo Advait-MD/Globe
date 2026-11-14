@@ -1,0 +1,15 @@
+{
+ "articles": 30,
+ "source": "live production /news output",
+ "verdicts_by": "claude (provisional)",
+ "no_location": 13,
+ "no_location_pct": 43.333333333333336,
+ "located": 17,
+ "counts": {
+  "unlabelled": 30
+ },
+ "correct_pct_of_all": 0.0,
+ "correct_pct_of_located": 0.0,
+ "markers_total": 23,
+ "fixture_matches_production_coords": "23/23"
+}

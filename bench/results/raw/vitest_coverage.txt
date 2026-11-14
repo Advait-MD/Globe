@@ -1,0 +1,30 @@
+
+ RUN  v2.1.9 /home/user/Globe/frontend/Civ
+      Coverage enabled with v8
+
+ ✓ src/__tests__/api.test.js (6 tests) 7ms
+ ✓ src/__tests__/orbitcontrol.test.js (7 tests) 53ms
+ ✓ src/__tests__/guardianfetch.test.js (7 tests) 46ms
+
+ Test Files  3 passed (3)
+      Tests  20 passed (20)
+   Start at  12:47:18
+   Duration  1.19s (transform 85ms, setup 0ms, collect 214ms, tests 106ms, environment 1.73s, prepare 235ms)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   24.55 |    81.69 |   76.47 |   24.55 |                   
+ App.jsx           |       0 |        0 |       0 |       0 | 1-11              
+ api.js            |     100 |    94.73 |     100 |     100 | 35                
+ earth.jsx         |       0 |        0 |       0 |       0 | 1-268             
+ guardianfetch.jsx |     100 |    94.11 |     100 |     100 | 28                
+ login.jsx         |       0 |        0 |       0 |       0 | 1-138             
+ main.jsx          |       0 |        0 |       0 |       0 | 1-10              
+ orbitcontrol.jsx  |     100 |    88.88 |     100 |     100 | 51,58,82          
+ prefrence.jsx     |       0 |        0 |       0 |       0 | 1-64              
+ profile.jsx       |       0 |        0 |       0 |       0 | 1-140             
+ signup.jsx        |       0 |        0 |       0 |       0 | 1-76              
+ sky.jsx           |       0 |        0 |       0 |       0 | 1-80              
+-------------------|---------|----------|---------|---------|-------------------

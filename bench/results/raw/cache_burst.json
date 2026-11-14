@@ -1,0 +1,19 @@
+{
+  "runs": [
+    {
+      "requests": 50,
+      "builds": 1,
+      "wall_ms": 302.23144100000354
+    },
+    {
+      "requests": 50,
+      "builds": 1,
+      "wall_ms": 392.9120769998917
+    },
+    {
+      "requests": 50,
+      "builds": 1,
+      "wall_ms": 398.4296799999356
+    }
+  ]
+}
