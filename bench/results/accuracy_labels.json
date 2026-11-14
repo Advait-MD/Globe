@@ -1,0 +1,122 @@
+{
+ "technology/2026/nov/14/microsoft-says-services-fully-restored-after-global-outage": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "technology/2026/nov/13/microsoft-outage-shakes-up-companies-local-governments": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "technology/live/2026/nov/13/microsoft-outage-down-today-live-update-outlook-teams-365-when-fixed-latest-status-cause-news": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china": {
+  "verdict": "correct",
+  "note": "US treasury story"
+ },
+ "technology/2026/nov/13/how-microsoft-outage-has-affected-key-public-services-in-the-uk": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "technology/2026/nov/13/microsoft-outage-hits-nhs-hospitals-gps-schools-and-police-across-uk": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "technology/2026/nov/13/how-it-feels-to-battle-with-a-flood-of-ai-generated-complaints": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "technology/2026/nov/13/microsoft-outage-outlook-teams-word-excel-reports": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "australia-news/2026/nov/13/global-microsoft-outage-what-happened-and-why": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "technology/2026/nov/13/marlon-brando-cool-jensen-huang-joke-black-leather-jacket-nvidia": {
+  "verdict": "correct",
+  "note": "debatable: Hollywood comes from the standfirst (Brando reference), not where the story happens"
+ },
+ "sport/live/2026/nov/14/cheltenham-november-meeting-horse-racing-live": {
+  "verdict": "none-missed",
+  "note": "Cheltenham is named but spaCy did not tag it"
+ },
+ "sport/2026/nov/14/england-first-test-zimbabwe-since-1996-cricket-exclusive": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "sport/2026/nov/14/david-warner-statement-sandpapergate-ball-tampering-australia-cricket-ntwnfb": {
+  "verdict": "none-ok",
+  "note": "no place named (Australia implied only)"
+ },
+ "sport/2026/nov/14/scientists-find-blood-biomarker-cte-diagnosis-rugby-american-football": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "sport/2026/nov/13/france-south-africa-nations-championship-match-report": {
+  "verdict": "correct",
+  "note": "the two teams' countries"
+ },
+ "sport/2026/nov/13/sandpaper-affair-australia-pat-cummins-cricket-england-scandal": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "sport/2026/nov/13/jonbon-shines-trying-day-troubled-home-of-jumps-racing-cheltenham-horse-racing-tips": {
+  "verdict": "none-ok",
+  "note": "Cheltenham implied, not named"
+ },
+ "sport/2026/nov/13/maro-itoje-england-sleepwalk-eddie-jones-japan-rugby-union": {
+  "verdict": "correct",
+  "note": "Japan named too but missed (not wrong, incomplete)"
+ },
+ "sport/2026/nov/13/rugby-league-world-cup-finals-atp-and-wta-tennis-plus-wsl-follow-with-us": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "sport/2026/nov/13/england-have-licence-to-thrill-against-japan-after-acing-audition-against-australia": {
+  "verdict": "correct",
+  "note": "Japan's label is in Japanese; coordinates right"
+ },
+ "environment/2026/nov/14/greenpeace-boulders-norfolk-vanguard-windfarms": {
+  "verdict": "correct",
+  "note": "Norfolk from the standfirst (Norfolk Vanguard windfarm)"
+ },
+ "environment/2026/nov/14/bristol-first-uk-wetland-city-flood": {
+  "verdict": "correct",
+  "note": "Bristol (more specific) missed"
+ },
+ "environment/2026/nov/14/salmon-organic-british-farmed-environmental-welfare": {
+  "verdict": "none-missed",
+  "note": "'British' (adjective) not mapped; arguable"
+ },
+ "environment/2026/nov/14/country-diary-one-of-britains-oldest-surviving-traditions-and-its-all-over-in-four-minutes": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "environment/2026/nov/14/rising-tide-protest-newcastle-coal-port-blockade-nsw-police-ntwnfb": {
+  "verdict": "wrong",
+  "note": "Newcastle NSW, Australia placed at Newcastle upon Tyne, UK (name ambiguity)"
+ },
+ "environment/2026/nov/13/anthony-albaneses-coffee-diplomacy-cant-remove-shadow-of-domestic-politics-at-cop31": {
+  "verdict": "correct",
+  "note": "Cop31 venue, Turkey, from the standfirst"
+ },
+ "environment/2026/nov/13/cop31-antonio-guterres-united-nations-climate-action": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ },
+ "environment/2026/nov/13/california-gavin-newsom-endorses-fossil-fuel-phaseout": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "environment/2026/nov/13/right-to-make-green-challenges-planning-decisions-under-threat-aarhus-convention": {
+  "verdict": "correct",
+  "note": ""
+ },
+ "environment/live/2026/nov/13/cop31-climate-crisis-talks-turkey-latest-news-updates": {
+  "verdict": "none-ok",
+  "note": "no place named"
+ }
+}

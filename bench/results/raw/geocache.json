@@ -1,89 +1,498 @@
 {
+  "source": "production rebuild timeline (cache misses seen by the poller)",
   "runs": [
     {
-      "refreshes": 3,
-      "lookups": 15,
+      "rebuilds": 25,
+      "lookups": 129,
       "nominatim": 14,
-      "served_from_db": 1,
-      "hit_pct": 6.666666666666667,
+      "served_from_db": 115,
+      "hit_pct": 89.14728682170542,
       "after_cold_start": {
-        "lookups": 0,
+        "rebuilds": 22,
+        "lookups": 114,
         "nominatim": 0,
-        "hit_pct": null
+        "hit_pct": 100.0
       },
-      "per_refresh": [
-        {
-          "section": "technology",
-          "lookups": 3,
-          "nominatim": 3
-        },
+      "per_rebuild": [
         {
           "section": "sport",
+          "first_for_section": true,
           "lookups": 6,
           "nominatim": 6
         },
         {
           "section": "environment",
+          "first_for_section": true,
           "lookups": 6,
-          "nominatim": 5
+          "nominatim": 6
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": true,
+          "lookups": 3,
+          "nominatim": 2
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
         }
       ]
     },
     {
-      "refreshes": 3,
-      "lookups": 15,
+      "rebuilds": 25,
+      "lookups": 129,
       "nominatim": 14,
-      "served_from_db": 1,
-      "hit_pct": 6.666666666666667,
+      "served_from_db": 115,
+      "hit_pct": 89.14728682170542,
       "after_cold_start": {
-        "lookups": 0,
+        "rebuilds": 22,
+        "lookups": 114,
         "nominatim": 0,
-        "hit_pct": null
+        "hit_pct": 100.0
       },
-      "per_refresh": [
-        {
-          "section": "technology",
-          "lookups": 3,
-          "nominatim": 3
-        },
+      "per_rebuild": [
         {
           "section": "sport",
+          "first_for_section": true,
           "lookups": 6,
           "nominatim": 6
         },
         {
           "section": "environment",
+          "first_for_section": true,
           "lookups": 6,
-          "nominatim": 5
+          "nominatim": 6
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": true,
+          "lookups": 3,
+          "nominatim": 2
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
         }
       ]
     },
     {
-      "refreshes": 3,
-      "lookups": 15,
+      "rebuilds": 25,
+      "lookups": 129,
       "nominatim": 14,
-      "served_from_db": 1,
-      "hit_pct": 6.666666666666667,
+      "served_from_db": 115,
+      "hit_pct": 89.14728682170542,
       "after_cold_start": {
-        "lookups": 0,
+        "rebuilds": 22,
+        "lookups": 114,
         "nominatim": 0,
-        "hit_pct": null
+        "hit_pct": 100.0
       },
-      "per_refresh": [
-        {
-          "section": "technology",
-          "lookups": 3,
-          "nominatim": 3
-        },
+      "per_rebuild": [
         {
           "section": "sport",
+          "first_for_section": true,
           "lookups": 6,
           "nominatim": 6
         },
         {
           "section": "environment",
+          "first_for_section": true,
           "lookups": 6,
-          "nominatim": 5
+          "nominatim": 6
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": true,
+          "lookups": 3,
+          "nominatim": 2
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "technology",
+          "first_for_section": false,
+          "lookups": 3,
+          "nominatim": 0
+        },
+        {
+          "section": "sport",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
+        },
+        {
+          "section": "environment",
+          "first_for_section": false,
+          "lookups": 6,
+          "nominatim": 0
         }
       ]
     }

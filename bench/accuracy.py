@@ -1,4 +1,4 @@
-"""Benchmark 3: geolocation accuracy on 50 real headlines, judged against PRODUCTION output.
+"""Benchmark 3: geolocation accuracy on up to 50 real headlines (all unique ones the poller saw), judged against PRODUCTION output.
 
 Input: the live poll logs (each /news response = what users actually saw). The first 50 unique
 articles by first-seen time are taken (deterministic). For every placed marker we show the
@@ -93,6 +93,7 @@ summary = {
     "counts": counts,
     "correct_pct_of_all": 100 * counts.get("correct", 0) / n,
     "correct_pct_of_located": 100 * counts.get("correct", 0) / located if located else None,
+    "handled_correctly_pct": 100 * (counts.get("correct", 0) + counts.get("none-ok", 0)) / n,  # right marker, or rightly none
     "markers_total": sum(r["markers"] for r in rows),
     "fixture_matches_production_coords": f"{sum(1 for c in consistency if c)}/{sum(1 for c in consistency if c is not None)}",
 }

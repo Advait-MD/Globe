@@ -18,7 +18,7 @@ python bench/backend/bench_news_latency.py
 python bench/backend/bench_nlp.py
 python bench/backend/bench_auth.py
 python bench/backend/bench_burst.py
-python bench/geocache.py
+python bench/geocache.py   # replays the 25 production rebuilds
 python bench/accuracy.py
 
 # 3. tests + coverage
@@ -36,8 +36,8 @@ python bench/backend/serve_replay.py --port 8766 --cors http://localhost:4182 & 
 (cd frontend/Civ && pnpm exec vite preview --outDir "$OUT/session" --port 4182 --strictPort) & P3=$!
 trap 'kill $STUB $REPLAY $P1 $P2 $P3 2>/dev/null' EXIT
 sleep 6
-node bench/frontend/load_time.cjs http://localhost:4181/ local-preview 5 > bench/results/raw/load_local.json
-node bench/frontend/load_time.cjs https://globe-mocha-eta.vercel.app/ vercel-live 5 --proxy > bench/results/raw/load_vercel.json  # [network]
+node bench/frontend/load_time.cjs http://localhost:4181/ local-preview 4 > bench/results/raw/load_local.json
+node bench/frontend/load_time.cjs https://globe-mocha-eta.vercel.app/ vercel-live 4 --proxy > bench/results/raw/load_vercel.json  # [network]
 node bench/frontend/fps.cjs http://localhost:4180/ 3 100,500,1000 > bench/results/raw/fps_swiftshader.json
 node bench/frontend/fps.cjs http://localhost:4180/ 3 0,20 > bench/results/raw/fps_swiftshader_baseline.json
 bash bench/frontend/lighthouse.sh http://localhost:4181/ local 3

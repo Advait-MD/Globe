@@ -6,10 +6,14 @@
  "no_location_pct": 43.333333333333336,
  "located": 17,
  "counts": {
-  "unlabelled": 30
+  "none-ok": 11,
+  "correct": 16,
+  "none-missed": 2,
+  "wrong": 1
  },
- "correct_pct_of_all": 0.0,
- "correct_pct_of_located": 0.0,
+ "correct_pct_of_all": 53.333333333333336,
+ "correct_pct_of_located": 94.11764705882354,
+ "handled_correctly_pct": 90.0,
  "markers_total": 23,
  "fixture_matches_production_coords": "23/23"
 }
